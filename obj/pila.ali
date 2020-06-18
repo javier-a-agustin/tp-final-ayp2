@@ -1,0 +1,61 @@
+V "GNAT Lib v2019"
+A -gnatA
+A -mtune=generic
+A -march=x86-64
+P ZX
+
+RN
+RV NO_ALLOCATORS
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTIONS
+RV NO_LOCAL_ALLOCATORS
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_UNCHECKED_DEALLOCATION
+RV NO_DEFAULT_INITIALIZATION
+RV NO_IMPLEMENTATION_PRAGMAS
+RV SPARK_05
+
+U pila%b		pila.adb		9af15f42 NE OO PK GE IL
+W unchecked_deallocation%s
+
+U pila%s		pila.ads		6ccf9e9a BN EE NE OO PK GE IL
+
+D pila.ads		20140424131758 6ccf9e9a pila%s
+D pila.adb		20200419143548 d77bd77c pila%b
+D system.ads		20190518041258 32a08138 system%s
+D unchdeal.ads		20190518041258 214516a4 unchecked_deallocation%s
+G a e
+G c Z s b [pila standard 4 9 none]
+X 1 pila.ads
+2+9 tipoInfo 20r48 32r43 48r12 2|21r48 57r43
+4k9*pila 2z9 45E9 53e4 2|3b14 90l5 90t9
+7X4*pilaLlena 2|30r16
+7X15*pilaVacia 2|43r16 60r16
+7X25*operacionNoImplementada
+9P9*tipoPila 14r27 20r32 26r35 32r26 37r32 42r28 46c9 49r12 2|5r59 10r27
+. 21r32 22r12 39r35 40r12 57r26 71r32 72r11 85r28
+14U14*crear 14<20 2|10b14 13l8 13t13
+14p20 p{9P9} 2|10b20 12m9
+20U14*apilar 20=22 20>42 2|21b14 31l8 31t14
+20p22 p{9P9} 2|21b22 26r18 27m7
+20*42 i{2+9} 2|21b42 25r19
+26U14*desapilar 26=25 2|39b14 49l8 49t17
+26p25 p{9P9} 2|39b25 42r11 45r17 46m10 46r15
+32U14*tope 32>20 32<36 2|57b14 64l8 64t12
+32p20 p{9P9} 2|57b20 59r11 62r15
+32*36 i{2+9} 2|57b36 62m10
+37U14*vaciar 37=22 2|71b14 79l8 79t14
+37p22 p{9P9} 2|71b22 72r23 75m10 75r15 77r17
+42V13*esVacia{boolean} 42>22 2|85b13 88l8 88t15
+42p22 p{9P9} 2|85b22 87r17
+45R9 tipoNodo 46r28 47c9 50e14 2|5r49 24r18
+48*7 info{2+9} 2|25m11 62r17
+49p7 sig{9P9} 2|26m11 46r17 75r17
+X 2 pila.adb
+5U14 free[4|20] 47s10 76s10
+22p7 aux{1|9P9} 24m7 25r7 26r7 27r12
+40p7 aux{1|9P9} 45m10 47m15 47r15
+72p7 aux{1|9P9} 74r14 76m15 76r15 77m10
+X 4 unchdeal.ads
+20u11*Unchecked_Deallocation 2|1w6 5r26
+

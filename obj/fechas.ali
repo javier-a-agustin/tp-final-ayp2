@@ -1,0 +1,186 @@
+V "GNAT Lib v2019"
+A -gnatA
+A -mtune=generic
+A -march=x86-64
+P ZX
+
+RN
+RV NO_CALENDAR
+RV NO_DELAY
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTION_PROPAGATION
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_NESTED_FINALIZATION
+RV NO_SECONDARY_STACK
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_UNCHECKED_DEALLOCATION
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_OBSOLESCENT_FEATURES
+RV SPARK_05
+
+U fechas%b		fechas.adb		2ac1e2b7 NE OO PK IL
+W ada%s			ada.ads			ada.ali
+W ada.calendar%s	a-calend.adb		a-calend.ali
+Z ada.exceptions%s	a-except.adb		a-except.ali
+W ada.float_text_io%s	a-flteio.ads		a-flteio.ali
+W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
+W ada.strings%s		a-string.ads		a-string.ali
+W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
+Z ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W ada.text_io.unbounded_io%s  a-tiunio.ads	a-tiunio.ali
+Z system%s		system.ads		system.ali
+Z system.concat_5%s	s-conca5.adb		s-conca5.ali
+Z system.finalization_masters%s  s-finmas.adb	s-finmas.ali
+Z system.img_int%s	s-imgint.adb		s-imgint.ali
+Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+Z system.soft_links%s	s-soflin.adb		s-soflin.ali
+Z system.standard_library%s  s-stalib.adb	s-stalib.ali
+Z system.storage_elements%s  s-stoele.adb	s-stoele.ali
+W text_io%s		text_io.ads		text_io.ali
+W unchecked_deallocation%s
+
+U fechas%s		fechas.ads		d9e9f9f6 EE NE OO PK IL
+
+D ada.ads		20190518041256 76789da1 ada%s
+D a-calend.ads		20190518041256 474d9720 ada.calendar%s
+D a-charac.ads		20190518041256 2d3ec45b ada.characters%s
+D a-chlat1.ads		20190518041256 66457d31 ada.characters.latin_1%s
+D a-except.ads		20190518041256 291912d5 ada.exceptions%s
+D a-finali.ads		20190518041256 bf4f806b ada.finalization%s
+D a-flteio.ads		20190518041256 e18a47a0 ada.float_text_io%s
+D a-inteio.ads		20190518041258 f64b89a4 ada.integer_text_io%s
+D a-ioexce.ads		20190518041256 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20190518041256 119b8fb3 ada.streams%s
+D a-string.ads		20190518041256 90ac6797 ada.strings%s
+D a-strmap.ads		20190518041256 e8bb714a ada.strings.maps%s
+D a-strunb.ads		20190518041256 1656705b ada.strings.unbounded%s
+D a-suteio.ads		20190518041256 26d8e9aa ada.strings.unbounded.text_io%s
+D a-tags.ads		20190518041258 491b781d ada.tags%s
+D a-textio.ads		20190518041258 aef4d56d ada.text_io%s
+D a-tiflio.ads		20190518041256 bf196650 ada.text_io.float_io%s
+D a-tiinio.ads		20190518041256 390edddb ada.text_io.integer_io%s
+D a-tiunio.ads		20190518041258 759c6b0c ada.text_io.unbounded_io%s
+D a-unccon.ads		20190518041256 0e9b276f ada.unchecked_conversion%s
+D fechas.ads		20200616133236 d9e9f9f6 fechas%s
+D fechas.adb		20200616214416 4fdf9afb fechas%b
+D interfac.ads		20190518041256 5ab55268 interfaces%s
+D i-cstrea.ads		20190518041256 e53d8b8e interfaces.c_streams%s
+D system.ads		20190518041258 32a08138 system%s
+D s-atocou.ads		20190518041258 b45c2d8d system.atomic_counters%s
+D s-conca5.ads		20190518041256 875e432e system.concat_5%s
+D s-crtl.ads		20190518041256 0ebbdb71 system.crtl%s
+D s-exctab.ads		20190518041256 54135002 system.exception_table%s
+D s-ficobl.ads		20190518041258 078245e4 system.file_control_block%s
+D s-finmas.ads		20190518041256 7811a767 system.finalization_masters%s
+D s-finroo.ads		20190518041258 4ff27390 system.finalization_root%s
+D s-imgint.ads		20190518041256 02dbe0c2 system.img_int%s
+D s-memory.ads		20190518041256 597d6634 system.memory%s
+D s-parame.ads		20190518041258 48ec542b system.parameters%s
+D s-secsta.ads		20190518041258 20bbe636 system.secondary_stack%s
+D s-soflin.ads		20190518041256 a7318a92 system.soft_links%s
+D s-stache.ads		20190518041258 a37c21ec system.stack_checking%s
+D s-stalib.ads		20190518041258 09bd3940 system.standard_library%s
+D s-stalib.adb		20190518041256 f2fe2716 system.standard_library%b
+D s-stoele.ads		20190518041258 2dc34a04 system.storage_elements%s
+D s-stopoo.ads		20190518041256 b16154c2 system.storage_pools%s
+D s-stposu.ads		20190518041256 97a6219c system.storage_pools.subpools%s
+D s-stratt.ads		20190518041256 aedef97e system.stream_attributes%s
+D s-traent.ads		20190518041256 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20190518041256 34867c83 system.unsigned_types%s
+D s-wchcon.ads		20190518041256 1b7d22d2 system.wch_con%s
+D text_io.ads		20190518041256 21b2c898 text_io%s
+D unchdeal.ads		20190518041258 214516a4 unchecked_deallocation%s
+G a e
+G c Z s b [esfechacorrecta fechas 14 13 none]
+G c Z s b [diasmes fechas 20 13 none]
+G c Z s b [nombremes fechas 25 13 none]
+G c Z s b [esbisiesto fechas 30 13 none]
+G c Z s b [fechatexto fechas 35 13 none]
+G c Z s b [fechaendias fechas 40 13 none]
+G c Z s b [diasentrefechas fechas 45 13 none]
+G c Z s b [fechahoy fechas 50 13 none]
+G c Z s b [cls fechas 52 14 none]
+G c Z s s [tfechaIP fechas 5 9 none]
+X 1 ada.ads
+16K9*Ada 20e8 22|2r15 2r60 2r73 2r94 2r113 3r14 3r59 3r72 3r93 3r112 12r7
+X 2 a-calend.ads
+36K13*Calendar 409e17 22|2w117 3r116
+42I9*Time<222I9> 22|118r10
+48I12*Year_Number{integer}
+49I12*Month_Number{integer}
+50I12*Day_Number{integer}
+56V13*Clock{42I9} 22|120s12
+64V13*Year{48I12} 22|123s17
+65V13*Month{49I12} 22|122s16
+66V13*Day{50I12} 22|121s16
+222I9 Time_Rep<long_long_integer>
+X 7 a-flteio.ads
+20K13*Float_Text_IO[17|46] 22|2w98 3r97
+X 8 a-inteio.ads
+18K13*Integer_Text_IO[18|46] 22|2w77 3r76
+X 11 a-string.ads
+16K13*Strings 35e16 22|2r19 3r18
+X 13 a-strunb.ads
+82K21*Unbounded 756e26 22|2w27 3r26
+87R9*Unbounded_String<6|43R9> 739e14 22|50r50
+103V13*To_Unbounded_String{87R9} 22|51s13 52s13 53s13 54s13 55s13 56s13 57s13
+. 58s13 59s13 60s13 61s13 62s13
+116V13*To_String{string} 22|64s14
+X 16 a-textio.ads
+57K13*Text_IO 727e16 22|2r38 2w64 3r63 12r11
+465U14*Put 22|12s19
+X 19 a-tiunio.ads
+25K21*Unbounded_IO 61e29 22|2w46 3r45
+X 21 fechas.ads
+1K9*fechas 53l5 53e11 22|8b14 128l5 128t11
+2I12*tDia{integer} 6r12
+3I12*tMes{integer} 7r12
+4I12*tAnio{integer} 8r13
+5R9*tFecha 9e14 14r39 35r34 40r35 45r40 50r29 22|18r39 70r34 84r35 105r40
+. 116r29 117r10
+6i7*dia{2I12} 22|20r20 73r37 97r28 121m9
+7i7*mes{3I12} 22|20r45 73r69 91r24 122m9
+8i7*anio{4I12} 22|20r56 74r39 87r21 88r28 88r45 88r64 92r42 123m9
+14V13*esFechaCorrecta{boolean} 14>29 22|18b13 21l8 21t23 72s10
+14r29 fecha{5R9} 22|18b29 20r14 20r39 20r50
+20V13*diasMes{integer} 20>21 20>26 22|20s31 26b13 33l8 33t15 92s25
+20i21 mes{integer} 22|26b21 29r11 32r24
+20i26 anio{integer} 22|26b25 29r36
+25V13*nombreMes{string} 25>24 22|49b13 65l8 65t17 73s53
+25i24 mes{integer} 22|49b24 64r36
+30V13*esBisiesto{boolean} 30>24 22|29s25 38b13 44l8 44t18
+30i24 anio{integer} 22|38b24 41r11 41r30 43r11 43r32
+35V13*fechaTexto{string} 35>24 22|70b13 79l8 79t18
+35r24 fecha{5R9} 22|70b24 72r26 73r31 73r63 74r33
+40V13*fechaEnDias{integer} 40>25 22|84b13 100l8 100t19 108s15 108s33
+40r25 fecha{5R9} 22|84b25 87r15 88r22 88r39 88r58 91r18 92r36 97r22
+45V13*diasEntreFechas{integer} 45>29 45>33 22|105b13 111l8 111t23
+45r29 f1{5R9} 22|105b29 108r45
+45r33 f2{5R9} 22|105b33 108r27
+50V13*fechaHoy{5R9} 22|116b13 126l8 126t16
+52U14*CLS 22|10b14 13l8 13t11
+X 22 fechas.adb
+27a7 diasMeses(integer) 32r14
+50a7 nombreMeses(13|87R9) 64r24
+85i7 dias{integer} 87m7 88m7 88r15 92m10 92r18 97m7 97r15 99r14
+85i13 m{integer} 90m7 91r14 92r33 94m10 94r15
+106i7 dias{integer} 108m7 110r14
+117r7 f{21|5R9} 121m7 122m7 123m7 125r14
+118i7 c{2|42I9} 120m7 121r20 122r22 123r22
+X 25 system.ads
+67M9*Address
+X 34 s-memory.ads
+53V13*Alloc{25|67M9} 103i<c,__gnat_malloc>22
+68U14*Free 104i<c,__gnat_free>22
+76V13*Realloc{25|67M9} 105i<c,__gnat_realloc>22
+X 40 s-stalib.adb
+93U14 Break_Start 94i<c,__gnat_break_start>22
+X 48 text_io.ads
+24K9*Text_IO=24:29 22|2w6 2w38 3r5 3r37
+X 49 unchdeal.ads
+20u11*Unchecked_Deallocation 22|1w6
+

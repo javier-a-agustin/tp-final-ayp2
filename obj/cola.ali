@@ -1,0 +1,91 @@
+V "GNAT Lib v2019"
+A -gnatA
+A -mtune=generic
+A -march=x86-64
+P ZX
+
+RN
+RV NO_ALLOCATORS
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_LOCAL_ALLOCATORS
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_UNCHECKED_DEALLOCATION
+RV NO_DEFAULT_INITIALIZATION
+RV NO_IMPLEMENTATION_PRAGMAS
+RV SPARK_05
+
+U cola%b		cola.adb		57fe1b90 NE OO PK GE IL
+W text_io%s		text_io.ads		text_io.ali
+W unchecked_deallocation%s
+
+U cola%s		cola.ads		dfc50dd7 BN EE NE OO PK GE IL
+
+D ada.ads		20190518041256 76789da1 ada%s
+D a-except.ads		20190518041256 291912d5 ada.exceptions%s
+D a-ioexce.ads		20190518041256 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20190518041256 119b8fb3 ada.streams%s
+D a-tags.ads		20190518041258 491b781d ada.tags%s
+D a-textio.ads		20190518041258 aef4d56d ada.text_io%s
+D a-unccon.ads		20190518041256 0e9b276f ada.unchecked_conversion%s
+D cola.ads		20140507143732 dfc50dd7 cola%s
+D cola.adb		20200419210836 88ccc87b cola%b
+D interfac.ads		20190518041256 5ab55268 interfaces%s
+D i-cstrea.ads		20190518041256 e53d8b8e interfaces.c_streams%s
+D system.ads		20190518041258 32a08138 system%s
+D s-crtl.ads		20190518041256 0ebbdb71 system.crtl%s
+D s-exctab.ads		20190518041256 54135002 system.exception_table%s
+D s-ficobl.ads		20190518041258 078245e4 system.file_control_block%s
+D s-parame.ads		20190518041258 48ec542b system.parameters%s
+D s-secsta.ads		20190518041258 20bbe636 system.secondary_stack%s
+D s-soflin.ads		20190518041256 a7318a92 system.soft_links%s
+D s-stache.ads		20190518041258 a37c21ec system.stack_checking%s
+D s-stalib.ads		20190518041258 09bd3940 system.standard_library%s
+D s-stoele.ads		20190518041258 2dc34a04 system.storage_elements%s
+D s-traent.ads		20190518041256 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20190518041256 34867c83 system.unsigned_types%s
+D s-wchcon.ads		20190518041256 1b7d22d2 system.wch_con%s
+D text_io.ads		20190518041256 21b2c898 text_io%s
+D unchdeal.ads		20190518041258 214516a4 unchecked_deallocation%s
+G a e
+G c Z s b [cola standard 6 9 none]
+X 8 cola.ads
+3+9 tipoInfo 25r50 37r46 54r16 9|23r49 63r44
+6k9*cola 3z9 51E9 62l5 62e9 9|4b14 95l5 95t9
+9X4*colaLlena 9|36r35
+9X15*colaVacia 9|48r16 66r16
+9X26*operacionNoImplementada
+12R9*tipoCola 19r29 25r33 31r36 37r28 42r32 47r28 57c9 60e14 9|12r27 23r33
+. 44r36 63r27 75r30 90r26
+19U14*crear 19<21 9|12b14 16l8 16t13
+19r21 q{12R9} 9|12b21 14m7 15m7
+25U14*encolar 25=23 25>43 9|23b14 37l8 37t15
+25r23 q{12R9} 9|23b23 29r11 30r10 32m10 34m7
+25*43 i{3+9} 9|23b43 27r19
+31U14*desencolar 31=26 9|44b14 57l8 57t18
+31r26 q{12R9} 9|44b26 47r11 50r17 51m10 51r22 52r14 53m13
+37U14*frente 37>22 37<38 9|63b14 70l8 70t14
+37r22 q{12R9} 9|63b21 65r11 68r15
+37*38 i{3+9} 9|63b37 68m10
+42U14*vaciar 42=22 9|75b14 84l8 84t14
+42r22 q{12R9} 9|75b21 78r14 79r17 80m10 80r22 83m7
+47V13*esVacia{boolean} 47>22 9|90b13 93l8 93t15
+47r22 q{12R9} 9|90b21 92r15
+51R9 tipoNodo 52r28 53c9 56e14 9|6r50 26r18
+52P9 tipoPunt(51R9) 55r15 58r18 59r17 9|6r60 24r12 45r12 76r12
+54*9 info{3+9} 9|27m11 68r24
+55p9 sig{52P9} 9|28m11 30m18 51r31 80r31
+58p9 frente{52P9} 9|14m9 32m12 47r13 50r19 51m12 51r23 51r24 52r16 65r13
+. 68r16 68r17 78r16 79r19 80m12 80r23 80r24 92r17
+59p9 final{52P9} 9|15m9 29r13 30r11 30r12 34m9 53m15 83m9
+X 9 cola.adb
+6U14 free[26|20] 55s10 81s10
+24p7 aux{8|52P9} 26m7 27r7 28r7 30r25 32r22 34r18
+45p7 aux{8|52P9} 50m10 55m15 55r15
+76p7 aux{8|52P9} 79m10 81m15 81r15
+X 25 text_io.ads
+24K9*Text_IO=24:29 9|1w6 2r5
+X 26 unchdeal.ads
+20u11*Unchecked_Deallocation 9|1w15 6r26
+

@@ -1,0 +1,141 @@
+V "GNAT Lib v2019"
+A -gnatA
+A -mtune=generic
+A -march=x86-64
+P ZX
+
+RN
+RV NO_ALLOCATORS
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTIONS
+RV NO_LOCAL_ALLOCATORS
+RV NO_RECURSION
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_UNCHECKED_DEALLOCATION
+RV NO_DEFAULT_INITIALIZATION
+RV NO_IMPLEMENTATION_PRAGMAS
+RV SPARK_05
+
+U arbol%b		arbol.adb		413f2551 NE OO PK GE IL
+W cola%s		cola.adb		cola.ali
+W unchecked_deallocation%s
+
+U arbol%s		arbol.ads		51bb6294 BN EE NE OO PK GE IL
+W cola%s		cola.adb		cola.ali
+Z text_io%s		text_io.ads		text_io.ali
+Z unchecked_deallocation%s
+
+D ada.ads		20190518041256 76789da1 ada%s
+D a-except.ads		20190518041256 291912d5 ada.exceptions%s
+D a-ioexce.ads		20190518041256 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20190518041256 119b8fb3 ada.streams%s
+D a-tags.ads		20190518041258 491b781d ada.tags%s
+D a-textio.ads		20190518041258 aef4d56d ada.text_io%s
+D a-unccon.ads		20190518041256 0e9b276f ada.unchecked_conversion%s
+D arbol.ads		20140507144144 8e7e6f43 arbol%s
+D arbol.adb		20200507165622 31c15161 arbol%b
+D cola.ads		20140507143732 dfc50dd7 cola%s
+D cola.adb		20200419210836 88ccc87b cola%b
+D interfac.ads		20190518041256 5ab55268 interfaces%s
+D i-cstrea.ads		20190518041256 e53d8b8e interfaces.c_streams%s
+D system.ads		20190518041258 32a08138 system%s
+D s-crtl.ads		20190518041256 0ebbdb71 system.crtl%s
+D s-exctab.ads		20190518041256 54135002 system.exception_table%s
+D s-ficobl.ads		20190518041258 078245e4 system.file_control_block%s
+D s-parame.ads		20190518041258 48ec542b system.parameters%s
+D s-secsta.ads		20190518041258 20bbe636 system.secondary_stack%s
+D s-soflin.ads		20190518041256 a7318a92 system.soft_links%s
+D s-stache.ads		20190518041258 a37c21ec system.stack_checking%s
+D s-stalib.ads		20190518041258 09bd3940 system.standard_library%s
+D s-stoele.ads		20190518041258 2dc34a04 system.storage_elements%s
+D s-traent.ads		20190518041256 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20190518041256 34867c83 system.unsigned_types%s
+D s-wchcon.ads		20190518041256 1b7d22d2 system.wch_con%s
+D text_io.ads		20190518041256 21b2c898 text_io%s
+D unchdeal.ads		20190518041258 214516a4 unchecked_deallocation%s
+G a e
+G c Z s b [arbol standard 12 9 none]
+X 8 arbol.ads
+4+9 tipoClave 8r29 9r29 10r29 14r39 33r53 39r53 45r48 51r54 87r15 9|13r53
+. 40r57 52r51 54r14 93r48 112r54
+5+9 tipoInfo 33r72 45r68 51r73 88r14 9|13r72 40r78 55r13 93r68 112r73
+8V19 ">"{boolean} 8>22 8>24 9|83s23
+8*22 a{4+9}
+8*24 b{4+9}
+9V19 "<"{boolean} 9>22 9>24 9|25s20 101s19 120s18
+9*22 a{4+9}
+9*24 b{4+9}
+10V19 "="{boolean} 10>22 10>24 9|22s16 60s20 98s16 117s21
+10*22 a{4+9}
+10*24 b{4+9}
+12k9*arbol 4z9 5z9 8z19 9z19 10z19 83E9 93l5 93e10 9|3b14 179l5 179t10
+14K12*ColaRecorridos[10|6] 15r8
+18X4*arbolLleno 9|33r35
+18X16*claveExiste 9|23r19
+18X29*claveNoExiste 9|58r16 96r16 115r16
+18X44*errorEnCola 9|155r35 166r35 177r31
+18X57*operacionNoImplementada
+21P9*tipoArbol 27r29 33r35 39r35 45r29 51r36 56r33 61r29 67r31 73r32 79r30
+. 84c9 89r17 90r17 9|5r59 7r27 13r35 40r34 41r11 52r34 53r11 93r29 112r36
+. 131r33 142r26 147r28 158r29 169r27
+27U14*crear 27<21 9|7b14 10l8 10t13
+27p21 a{21P9} 9|7b21 9m7
+33U14*insertar 33=24 33>46 33>65 9|13b14 26s16 28s16 37l8 37t16
+33p24 a{21P9} 9|13b24 15r11 16m10 17r10 18r10 19r10 20r10 22r18 25r22 26r25
+. 28r25
+33*46 k{4+9} 9|13b46 17r21 22r14 25r18 26r36 28r36
+33*65 i{5+9} 9|13b65 18r20 26r39 28r39
+39U14*suprimir 39=24 39>46 9|52b14 78s22 84s16 86s16 90l8 90t16
+39p24 a{21P9} 9|52b24 57r10 60r13 61r16 61r35 62m21 63m16 65r19 65r39 66r24
+. 67m19 67r22 70r22 70r41 71r27 72m22 72r25 75r34 76r22 77r22 78r31 83r16
+. 84r25 86r25
+39*46 k{4+9} 9|52b45 60r21 83r24 84r36 86r36
+45U14*buscar 45>22 45>41 45<60 9|93b14 102s16 104s16 108l8 108t14
+45p22 a{21P9} 9|93b22 95r11 98r18 99r18 101r21 102r23 104r23
+45*41 k{4+9} 9|93b41 98r14 101r17 102r34 104r34
+45*60 i{5+9} 9|93b60 99m13 102m37 104m37
+51U14*modificar 51=25 51>47 51>66 9|112b14 121s16 123s16 127l8 127t17
+51p25 a{21P9} 9|112b25 114r11 117r14 118r13 120r19 121r26 123r26
+51*47 k{4+9} 9|112b47 117r22 120r17 121r36 123r36
+51*66 i{5+9} 9|112b66 118r21 121r38 123r38
+56U14*vaciar 56=22 9|131b14 134s10 135s10 139l8 139t14
+56p22 a{21P9} 9|131b22 133r11 134r17 135r17 136m15 137m10
+61V13*esVacio{boolean} 61>22 9|142b13 145l8 145t15
+61p22 a{21P9} 9|142b21 144r17
+67U14*preOrder 67>24 67=43 9|147b14 151s10 152s10 156l8 156t16
+67p24 a{21P9} 9|147b23 149r11 150r21 151r19 152r19
+67r43 q{10|12R9[14]} 9|147b39 150m18 151m30 152m30
+73U14*postOrder 73>25 73=44 9|158b14 161s10 162s10 167l8 167t17
+73p25 a{21P9} 9|158b24 160r11 161r20 162r20 163r21
+73r44 q{10|12R9[14]} 9|158b40 161m31 162m31 163m18
+79U14*inOrder 79>23 79=42 9|169b14 172s10 174s10 178l8 178t15
+79p23 a{21P9} 9|169b22 171r11 172r18 173r20 174r18
+79r42 q{10|12R9[14]} 9|169b38 172m29 173m18 174m29
+83R9 tipoNodo 84r29 86c9 91e14 9|5r50 16r19
+87*7 clave{4+9} 9|17m12 22r20 25r24 47r17 60r15 77m24 83r18 98r20 101r23
+. 117r16 120r21 150r23 163r23 173r22
+88*7 info{5+9} 9|18m12 48r16 76m24 99r20 118m15
+89p7 hijoIzq{21P9} 9|19m12 26m27 44r15 45r15 61r18 65r21 67r24 70r24 84m27
+. 102r25 121m28 134m19 151r21 161r22 172r20
+90p7 hijoDer{21P9} 9|20m12 28m27 61r37 65r41 70r43 72r27 75r36 78m33 86m27
+. 104r25 123m28 135m19 152r21 162r22 174r20
+X 9 arbol.adb
+5U14 free[28|20] 62s16 68s19 73s22 136s10
+40U14 buscarMenor 40b14 40>27 40<45 40<67 49l8 49t19 75s22
+40p27 ab{8|21P9} 43r12
+40*45 claveM{8|4+9} 47m7
+40*67 infoM{8|5+9} 48m7
+41p9 a{8|21P9} 43m7 44r13 45m10 45r13 47r15 48r14
+53p7 aux{8|21P9} 66m19 68m24 68r24 71m22 73m27 73r27
+54*7 clave{8|4+9} 75m44 77r31 78r42
+55*7 info{8|5+9} 75m50 76r30
+X 10 cola.ads
+6k9*cola 8|1w6 14r34 9|1w29 10|62e9
+9X4 colaLlena 9|155r16[8|14] 166r16[8|14] 177r12[8|14]
+12R9 tipoCola 8|67r54[14] 73r55[14] 79r53[14] 9|147r48[8|14] 158r49[8|14]
+. 169r47[8|14]
+25U14 encolar 9|150s10[8|14] 163s10[8|14] 173s10[8|14]
+X 28 unchdeal.ads
+20u11*Unchecked_Deallocation 9|1w6 5r26
+

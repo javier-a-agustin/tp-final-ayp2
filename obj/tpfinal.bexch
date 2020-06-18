@@ -1,0 +1,25 @@
+[GENERATED OBJECT FILE]
+b__tpfinal.o
+[PROJECT FILES]
+C:\GNAT\tpfinal\tpfinal.gpr
+20200618011740
+[BOUND OBJECT FILES]
+C:\GNAT\tpfinal\obj\cola.o
+C:\GNAT\tpfinal\obj\arbol.o
+C:\GNAT\tpfinal\obj\fechas.o
+C:\GNAT\tpfinal\obj\lista.o
+C:\GNAT\tpfinal\obj\pila.o
+C:\GNAT\tpfinal\obj\utiles.o
+C:\GNAT\tpfinal\obj\tpfinal.o
+[GENERATED SOURCE FILES]
+b__tpfinal.ads
+b__tpfinal.adb
+b__tpfinal.ali
+[RESULTING OPTIONS]
+-LC:\GNAT\tpfinal\obj\
+-LC:\GNAT\tpfinal\obj\
+-LC:/gnat/2019/lib/gcc/x86_64-pc-mingw32/8.3.1/adalib/
+-static
+-static-libgcc
+C:/gnat/2019/lib/gcc/x86_64-pc-mingw32/8.3.1/adalib/libgnat.a
+-Wl,--stack=0x2000000

@@ -1,0 +1,164 @@
+V "GNAT Lib v2019"
+A -gnatA
+A -mtune=generic
+A -march=x86-64
+P ZX
+
+RN
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTIONS
+RV NO_FLOATING_POINT
+RV NO_IO
+RV NO_NESTED_FINALIZATION
+RV NO_SECONDARY_STACK
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DEFAULT_INITIALIZATION
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_OBSOLESCENT_FEATURES
+RV SPARK_05
+
+U utiles%b		utiles.adb		8ac58ecd NE OO PK IL
+W ada%s			ada.ads			ada.ali
+Z ada.exceptions%s	a-except.adb		a-except.ali
+W ada.float_text_io%s	a-flteio.ads		a-flteio.ali
+W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
+W ada.strings%s		a-string.ads		a-string.ali
+W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
+Z ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W ada.text_io.unbounded_io%s  a-tiunio.ads	a-tiunio.ali
+Z system.concat_2%s	s-conca2.adb		s-conca2.ali
+Z system.concat_5%s	s-conca5.adb		s-conca5.ali
+Z system.img_int%s	s-imgint.adb		s-imgint.ali
+Z system.img_real%s	s-imgrea.adb		s-imgrea.ali
+Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+Z system.soft_links%s	s-soflin.adb		s-soflin.ali
+Z system.standard_library%s  s-stalib.adb	s-stalib.ali
+
+U utiles%s		utiles.ads		16f53e23 EE NE OO PK IL
+
+D ada.ads		20190518041256 76789da1 ada%s
+D a-charac.ads		20190518041256 2d3ec45b ada.characters%s
+D a-chlat1.ads		20190518041256 66457d31 ada.characters.latin_1%s
+D a-except.ads		20190518041256 291912d5 ada.exceptions%s
+D a-finali.ads		20190518041256 bf4f806b ada.finalization%s
+D a-flteio.ads		20190518041256 e18a47a0 ada.float_text_io%s
+D a-inteio.ads		20190518041258 f64b89a4 ada.integer_text_io%s
+D a-ioexce.ads		20190518041256 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20190518041256 119b8fb3 ada.streams%s
+D a-string.ads		20190518041256 90ac6797 ada.strings%s
+D a-strmap.ads		20190518041256 e8bb714a ada.strings.maps%s
+D a-strunb.ads		20190518041256 1656705b ada.strings.unbounded%s
+D a-suteio.ads		20190518041256 26d8e9aa ada.strings.unbounded.text_io%s
+D a-tags.ads		20190518041258 491b781d ada.tags%s
+D a-textio.ads		20190518041258 aef4d56d ada.text_io%s
+D a-tiflio.ads		20190518041256 bf196650 ada.text_io.float_io%s
+D a-tiinio.ads		20190518041256 390edddb ada.text_io.integer_io%s
+D a-tiunio.ads		20190518041258 759c6b0c ada.text_io.unbounded_io%s
+D a-unccon.ads		20190518041256 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20190518041256 5ab55268 interfaces%s
+D i-cstrea.ads		20190518041256 e53d8b8e interfaces.c_streams%s
+D system.ads		20190518041258 32a08138 system%s
+D s-atocou.ads		20190518041258 b45c2d8d system.atomic_counters%s
+D s-conca2.ads		20190518041256 02a0d7d0 system.concat_2%s
+D s-conca5.ads		20190518041256 875e432e system.concat_5%s
+D s-crtl.ads		20190518041256 0ebbdb71 system.crtl%s
+D s-exctab.ads		20190518041256 54135002 system.exception_table%s
+D s-ficobl.ads		20190518041258 078245e4 system.file_control_block%s
+D s-finmas.ads		20190518041256 7811a767 system.finalization_masters%s
+D s-finroo.ads		20190518041258 4ff27390 system.finalization_root%s
+D s-imgint.ads		20190518041256 02dbe0c2 system.img_int%s
+D s-imgrea.ads		20190518041256 c7a851e2 system.img_real%s
+D s-memory.ads		20190518041256 597d6634 system.memory%s
+D s-parame.ads		20190518041258 48ec542b system.parameters%s
+D s-secsta.ads		20190518041258 20bbe636 system.secondary_stack%s
+D s-soflin.ads		20190518041256 a7318a92 system.soft_links%s
+D s-stache.ads		20190518041258 a37c21ec system.stack_checking%s
+D s-stalib.ads		20190518041258 09bd3940 system.standard_library%s
+D s-stalib.adb		20190518041256 f2fe2716 system.standard_library%b
+D s-stoele.ads		20190518041258 2dc34a04 system.storage_elements%s
+D s-stopoo.ads		20190518041256 b16154c2 system.storage_pools%s
+D s-stposu.ads		20190518041256 97a6219c system.storage_pools.subpools%s
+D s-stratt.ads		20190518041256 aedef97e system.stream_attributes%s
+D s-traent.ads		20190518041256 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20190518041256 34867c83 system.unsigned_types%s
+D s-wchcon.ads		20190518041256 1b7d22d2 system.wch_con%s
+D utiles.ads		20140326203250 16f53e23 utiles%s
+D utiles.adb		20200326212208 46cfb0d0 utiles%b
+G a e
+G c Z s b [confirma utiles 6 13 none]
+G c Z s b [continua utiles 11 14 none]
+G c Z s b [numeroent utiles 16 13 none]
+G c Z s b [numeroreal utiles 21 13 none]
+G c Z s b [enteroenrango utiles 26 13 none]
+G c Z s b [realenrango utiles 31 13 none]
+G c Z s b [textonovacio utiles 36 13 none]
+G c Z s b [cls utiles 41 14 none]
+X 1 ada.ads
+16K9*Ada 20e8 48|1r6 2r6 3r6 4r6 5r6 6r5 7r5 8r5 9r5 10r5 148r7
+X 6 a-flteio.ads
+20K13*Float_Text_IO[16|46] 48|5w10 10r9
+X 7 a-inteio.ads
+18K13*Integer_Text_IO[17|46] 48|4w10 9r9
+X 10 a-string.ads
+16K13*Strings 35e16 48|2r10 7r9
+X 12 a-strunb.ads
+82K21*Unbounded 756e26 48|2w18 7r17
+87R9*Unbounded_String<5|43R9> 739e14 48|37r12 132r10
+92V13*Length{natural} 48|137s19
+116V13*To_String{string} 48|139s16
+X 15 a-textio.ads
+57K13*Text_IO 727e16 48|1w10 3r10 6r9 8r9 148r11
+273U14*Skip_Line 48|53s13 58s16 74s13 79s16 99s16 102s7 120s16 123s7
+465U14*Put 48|148s19
+495V13*Get_Line{string} 48|22s19
+508U14*Put_Line 48|21s13 26s16 39s7 51s13 57s16 72s13 78s16 94s13 115s13
+. 135s12
+548X4*Data_Error 48|56r18 77r18 98r18 119r18
+X 16 a-tiflio.ads
+60U14*Get 48|73s13[6|20] 116s13[6|20]
+X 17 a-tiinio.ads
+59U14*Get 48|52s13[7|18] 95s13[7|18]
+X 18 a-tiunio.ads
+25K21*Unbounded_IO 61e29 48|3w18 8r17
+49V13*Get_Line=50:42{12|87R9} 48|40s13 136s18
+X 22 system.ads
+67M9*Address
+X 33 s-memory.ads
+53V13*Alloc{22|67M9} 103i<c,__gnat_malloc>22
+68U14*Free 104i<c,__gnat_free>22
+76V13*Realloc{22|67M9} 105i<c,__gnat_realloc>22
+X 39 s-stalib.adb
+93U14 Break_Start 94i<c,__gnat_break_start>22
+X 47 utiles.ads
+1K9*utiles 43l5 43e11 48|12b14 151l5 151t11
+6V13*confirma{boolean} 6>22 48|17b13 30l8 30t16
+6a22 mensaje{string} 48|17b22 21r22
+11U14*continua 11>23 48|36b14 41l8 41t16
+11a23 mensaje{string} 48|36b23 39r16
+16V13*numeroEnt{integer} 16>23 48|47b13 62l8 62t17
+16a23 mensaje{string} 48|47b23 51r22
+21V13*numeroReal{float} 21>24 48|68b13 83l8 83t18
+21a24 mensaje{string} 48|68b24 72r22
+26V13*enteroEnRango{integer} 26>27 26>43 26>53 48|89b13 104l8 104t21
+26a27 mensaje{string} 48|89b27 94r22
+26i43 rangoInf{integer} 48|89b47 94r46 96r23
+26i53 rangoSup{integer} 48|89b57 94r80 96r50
+31V13*realEnRango{float} 31>25 31>41 31>51 48|110b13 125l8 125t19
+31a25 mensaje{string} 48|110b25 115r22
+31f41 rangoInf{float} 48|110b45 115r44 117r23
+31f51 rangoSup{float} 48|110b55 115r76 117r50
+36V13*textoNoVacio{string} 36>26 48|131b13 140l8 140t20
+36a26 mensaje{string} 48|131b26 135r21
+41U14*CLS 48|146b14 149l8 149t11
+X 48 utiles.adb
+18a7 resp{string} 22m13 23r23 23r35 23r47 23r59 29r14 29r26
+37r7 resp{12|87R9} 40m7
+48i7 resp{integer} 52m17 61r14
+69f7 resp{float} 73m17 82r14
+90i7 resp{integer} 95m17 96r35 96r44 103r14
+111f7 resp{float} 116m17 117r35 117r44 124r14
+132r4 resp{12|87R9} 136m12 137r26 139r26
+
