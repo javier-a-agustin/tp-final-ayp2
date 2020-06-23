@@ -1,1 +1,1 @@
-tpfinal.adb:106:04: warning: variable "platos" is never read and never assigned
+tpfinal.adb:340:04: warning: variable "platos" is never read and never assigned
