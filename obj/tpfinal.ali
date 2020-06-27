@@ -21,10 +21,11 @@ RV NO_SECONDARY_STACK
 RV NO_STANDARD_ALLOCATORS_AFTER_ELABORATION
 RV NO_STANDARD_STORAGE_POOLS
 RV NO_DEFAULT_INITIALIZATION
+RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 RV SPARK_05
 
-U tpfinal%b		tpfinal.adb		6936355b NE OO SU
+U tpfinal%b		tpfinal.adb		54d54236 NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.exceptions%s	a-except.adb		a-except.ali
 W ada.float_text_io%s	a-flteio.ads		a-flteio.ali
@@ -42,6 +43,8 @@ W pila%s		pila.adb		pila.ali
 Z system%s		system.ads		system.ali
 Z system.exception_table%s  s-exctab.adb	s-exctab.ali
 Z system.finalization_masters%s  s-finmas.adb	s-finmas.ali
+Z system.img_int%s	s-imgint.adb		s-imgint.ali
+Z system.img_real%s	s-imgrea.adb		s-imgrea.ali
 Z system.pool_global%s	s-pooglo.adb		s-pooglo.ali
 Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 Z system.soft_links%s	s-soflin.adb		s-soflin.ali
@@ -90,6 +93,8 @@ D s-exctab.ads		20190518041256 54135002 system.exception_table%s
 D s-ficobl.ads		20190518041258 078245e4 system.file_control_block%s
 D s-finmas.ads		20190518041256 7811a767 system.finalization_masters%s
 D s-finroo.ads		20190518041258 4ff27390 system.finalization_root%s
+D s-imgint.ads		20190518041256 02dbe0c2 system.img_int%s
+D s-imgrea.ads		20190518041256 c7a851e2 system.img_real%s
 D s-memory.ads		20190518041256 597d6634 system.memory%s
 D s-parame.ads		20190518041258 48ec542b system.parameters%s
 D s-pooglo.ads		20190518041256 ede33ef8 system.pool_global%s
@@ -106,7 +111,7 @@ D s-traent.ads		20190518041256 005bf670 system.traceback_entries%s
 D s-unstyp.ads		20190518041256 34867c83 system.unsigned_types%s
 D s-wchcon.ads		20190518041256 1b7d22d2 system.wch_con%s
 D text_io.ads		20190518041256 21b2c898 text_io%s
-D tpfinal.adb		20200622223636 50583dd6 tpfinal%b
+D tpfinal.adb		20200627182240 6dbb4abb tpfinal%b
 D unchdeal.ads		20190518041258 214516a4 unchecked_deallocation%s
 D utiles.ads		20140326203250 16f53e23 utiles%s
 G a e
@@ -115,195 +120,277 @@ G r i none [tpfinal standard 16 11 none] [lista standard 8 9 none]
 G r i none [tpfinal standard 16 11 none] [cola standard 6 9 none]
 G r i none [tpfinal standard 16 11 none] [arbol standard 12 9 none]
 G r c none [tpfinal standard 16 11 none] [enteroenrango utiles 26 13 none]
-G r c none [tpfinal standard 16 11 none] [confirma utiles 6 13 none]
-G r c none [tpfinal standard 16 11 none] [continua utiles 11 14 none]
+G r c none [tpfinal standard 16 11 none] [textonovacio utiles 36 13 none]
 G r c none [tpfinal standard 16 11 none] [numeroent utiles 16 13 none]
+G r c none [tpfinal standard 16 11 none] [confirma utiles 6 13 none]
+G r c none [tpfinal standard 16 11 none] [numeroreal utiles 21 13 none]
+G r c none [tpfinal standard 16 11 none] [esfechacorrecta fechas 14 13 none]
+G r c none [tpfinal standard 16 11 none] [fechatexto fechas 35 13 none]
+G r c none [tpfinal standard 16 11 none] [continua utiles 11 14 none]
 X 1 ada.ads
-16K9*Ada 20e8 54|1r6 2r6 3r6 4r6 5r6 6r5 7r6 8r6 9r6 10r5
+16K9*Ada 20e8 56|1r6 2r6 3r6 4r6 5r6 6r5 7r6 8r6 9r6 10r5
 X 6 a-flteio.ads
-20K13*Float_Text_IO[16|46] 54|5w10 10r9
+20K13*Float_Text_IO[16|46] 56|5w10 10r9
 X 7 a-inteio.ads
-18K13*Integer_Text_IO[17|46] 54|4w10 9r10
+18K13*Integer_Text_IO[17|46] 56|4w10 9r10
 X 10 a-string.ads
-16K13*Strings 35e16 54|2r10 7r10
+16K13*Strings 35e16 56|2r10 7r10
 X 12 a-strunb.ads
-82K21*Unbounded 756e26 54|2w18 7r18
-87R9*Unbounded_String<5|43R9> 739e14 54|20r31 32r15 33r17 34r18 35r17 42r30
-. 70r40 135r105 140r151 255r18
-103V13*To_Unbounded_String{87R9} 54|72s14 137s14
-238V14*"="{boolean} 54|26r74 48r71
-256V14*"<"{boolean} 54|26r69 48r66
+82K21*Unbounded 756e26 56|2w18 7r18
+87R9*Unbounded_String<5|43R9> 739e14 56|20r31 32r15 33r17 34r18 35r17 42r30
+. 152r40
+103V13*To_Unbounded_String{87R9} 56|154s14
+116V13*To_String{string} 56|278s14
+238V14*"="{boolean} 56|26r74 48r71
+256V14*"<"{boolean} 56|26r69 48r66
 X 15 a-textio.ads
-57K13*Text_IO 727e16 54|1w10 3r10 6r9 8r10
-508U14*Put_Line 54|149s7 150s7 151s7 152s7 153s7 154s7 167s13 187s13 217s7
-. 218s7 219s7 220s7 236s10 259s10 286s7 287s7 288s7 289s7 290s7 291s7
+57K13*Text_IO 727e16 56|1w10 3r10 6r9 8r10
+264U14*New_Line 56|135s123 292s179 314s58 317s107
+465U14*Put 56|135s21 135s33 135s67 135s83 292s10 292s46 292s59 292s94 292s107
+. 292s142 292s163 314s10 314s42 317s10 317s27 317s62 317s82
+508U14*Put_Line 56|110s10 185s37 186s36 205s10 210s49 217s7 218s7 219s7 220s7
+. 235s13 251s13 259s7 298s7 325s7 326s7 327s7 328s7 329s7 330s7 343s13 363s13
+. 393s7 394s7 395s7 396s7 412s10 435s10 462s7 463s7 464s7 465s7 466s7 467s7
 X 18 a-tiunio.ads
-25K21*Unbounded_IO 61e29 54|3w18 8r18
+25K21*Unbounded_IO 61e29 56|3w18 8r18
+32U14*Put=34:42 56|135s10
 X 20 arbol.ads
-12k9*arbol 93e10 54|5w54 38r30 60r29
-14K12 ColaRecorridos[22|6] 54|230r30[60] 242r26[60] 243r23[60] 245r23[60]
-. 253r30[60] 266r26[60] 267r23[60] 269r23[60]
-18X44 errorEnCola 54|248r32[60] 272r29[60]
-21P9 tipoArbol 54|125r53[60] 125r142[38] 135r87[38] 140r57[60] 229r55[60]
-. 229r90[38] 251r59[60] 251r94[38] 277r56[38] 277r124[60] 312r53[38] 312r86[60]
-. 317r50[60] 317r125[38] 322r45[60] 322r80[38] 338r25[38] 339r23[60]
-27U14 crear 54|279s18[38] 281s17[60]
-61V13 esVacio{boolean} 54|235s10[60] 258s10[60]
-79U14 inOrder 54|240s20[60] 264s20[60]
+12k9*arbol 93e10 56|5w54 38r30 60r29
+14K12 ColaRecorridos[22|6] 56|406r30[60] 418r26[60] 419r23[60] 421r23[60]
+. 429r30[60] 442r26[60] 443r23[60] 445r23[60]
+18X44 errorEnCola 56|424r32[60] 448r29[60]
+21P9 tipoArbol 56|274r87[38] 281r53[60] 281r142[38] 303r57[60] 405r55[60]
+. 405r90[38] 427r59[60] 427r94[38] 453r56[38] 453r124[60] 488r53[38] 488r86[60]
+. 493r50[60] 493r125[38] 498r45[60] 498r80[38] 514r25[38] 515r23[60]
+27U14 crear 56|455s18[38] 457s17[60]
+45U14 buscar 56|277s7[38] 286s7[60] 309s7[60]
+61V13 esVacio{boolean} 56|411s10[60] 434s10[60]
+79U14 inOrder 56|416s20[60] 440s20[60]
 X 22 cola.ads
-6k9*cola 62e9 54|5w49
-12R9 tipoCola 54|230r45[20|14[54|60]] 253r45[20|14[54|60]]
-31U14 desencolar 54|245s38[20|14[54|60]] 269s38[20|14[54|60]]
-37U14 frente 54|243s38[20|14[54|60]] 267s38[20|14[54|60]]
-47V13 esVacia{boolean} 54|242s41[20|14[54|60]] 266s41[20|14[54|60]]
+6k9*cola 62e9 56|5w49
+12R9 tipoCola 56|406r45[20|14[56|60]] 429r45[20|14[56|60]]
+31U14 desencolar 56|421s38[20|14[56|60]] 445s38[20|14[56|60]]
+37U14 frente 56|419s38[20|14[56|60]] 443s38[20|14[56|60]]
+47V13 esVacia{boolean} 56|418s41[20|14[56|60]] 442s41[20|14[56|60]]
 X 24 fechas.ads
-1K9*fechas 53e11 54|5w31 10r30
-5R9*tFecha 9e14 54|55r20 120r40 125r110 231r14
+1K9*fechas 53e11 56|5w31 10r30
+2I12*tDia{integer}
+3I12*tMes{integer}
+4I12*tAnio{integer}
+5R9*tFecha 9e14 56|55r20 114r43 114r67 262r40 281r110 283r20 407r14
+6i7*dia{2I12} 56|116r29 116r47 266m16
+7i7*mes{3I12} 56|116r70 116r88 267m16
+8i7*anio{4I12} 56|116r111 116r130 268m16
+14V13*esFechaCorrecta{boolean} 56|270s20
+35V13*fechaTexto{string} 56|292s63
 X 27 lista.ads
-8k9*lista 103e10 54|5w38 26r29 48r28
-19R9 tipoLista 54|56r24[48] 75r48[26] 85r54[26] 95r53[26] 105r62[26] 110r62[26]
-. 159r54[26] 176r53[26] 193r60[26] 207r56[26] 277r90[26] 296r59[26] 317r158[26]
-. 337r23[26] 340r21[48]
-24U14 crear 54|280s17[26]
-82U14 vaciar 54|210s10[26]
+8k9*lista 103e10 56|5w38 26r29 48r28
+10X4 listaLlena 56|186r22[26] 210r35[26]
+11X4 claveExiste 56|185r22[26]
+12X4 claveNoExiste 56|162r32[26]
+19R9 tipoLista 56|56r24[48] 70r94[26] 88r93[26] 125r48[48] 157r48[26] 175r54[26]
+. 199r53[26] 225r62[26] 241r62[26] 305r24[48] 335r54[26] 352r53[26] 369r60[26]
+. 383r56[26] 453r90[26] 472r59[26] 493r158[26] 513r23[26]
+24U14 crear 56|456s17[26]
+30U14 insertar 56|182s7[26]
+36U14 modificar 56|85s7[26] 108s10[26] 209s13[26]
+47V13 longitud{natural} 56|130s15[48]
+53U14 recuClave 56|78s7[26] 98s7[26] 134s10[48] 160s7[26] 202s7[26]
+65U14 recuSig 56|136s10[48]
+71U14 recuPrim 56|131s7[48]
+82U14 vaciar 56|386s10[26]
 X 29 pila.ads
-4k9*pila 53e4 54|5w44
+4k9*pila 53e4 56|5w44
 X 31 system.ads
 67M9*Address
-X 38 s-memory.ads
+X 40 s-memory.ads
 53V13*Alloc{31|67M9} 103i<c,__gnat_malloc>22
 68U14*Free 104i<c,__gnat_free>22
 76V13*Realloc{31|67M9} 105i<c,__gnat_realloc>22
-X 45 s-stalib.adb
+X 47 s-stalib.adb
 93U14 Break_Start 94i<c,__gnat_break_start>22
-X 54 tpfinal.adb
-16U11*Tpfinal 16b11 363l5 363t12
-20R12 tipoClaveVianda{12|87R9} 26r35 75r76 85r82 95r81 160r21 177r21
-21R9 tipoInfoVianda 24e14 26r52
-22i7 cantidad{integer}
-23f7 precioIndividual{float}
-26K12 p_viandas[27|8] 27r8 75r38 85r44 95r43 105r52 110r52 159r44 176r43
-. 193r50 207r46 277r80 280r7 296r49 317r148 337r13
-30I12 tipoClaveCliente{integer} 38r36 54r19 135r45 140r119 317r83
-31R9 tipoInfoCliente 36e14 38r54
+X 56 tpfinal.adb
+16U11*Tpfinal 16b11 539l5 539t12
+20R12 tipoClaveVianda{12|87R9} 26r35 70r51 88r50 157r76 175r82 199r81 226r21
+. 242r21 336r21 353r21
+21R9 tipoInfoVianda 24e14 26r52 72r13 73r18 91r13 92r18 158r10 177r13 200r13
+22i7 cantidad{integer} 79r24 83m17 83r53 100r24 107m20 179m12
+23f7 precioIndividual{float} 80r22 82m17 101r22 106m20 180m12 204r16 208m18
+26K12 p_viandas[27|8] 27r8 70r84 88r83 157r38 162r22 175r44 185r12 186r12
+. 199r43 210r25 225r52 241r52 335r44 352r43 369r50 383r46 453r80 456r7 472r49
+. 493r148 513r13
+30I12 tipoClaveCliente{integer} 38r36 54r19 274r45 303r119 493r83
+31R9 tipoInfoCliente 36e14 38r54 275r13
 32r7 nombre{12|87R9}
 33r7 apellido{12|87R9}
-34r7 direccion{12|87R9}
+34r7 direccion{12|87R9} 278r29
 35r7 telefono{12|87R9}
-38K12 p_clientes[20|12] 39r8 125r131 135r76 229r79 251r83 277r45 279r7 312r42
-. 317r114 322r69 338r14
-42R12 tipoClavePlato{12|87R9} 48r34
-43R9 tipoInfoPlato 46e14 48r50
-44i7 cantidad{integer}
-45f7 precioIndividual{float}
-48K12 p_platos[27|8] 49r8 56r15 340r12
-52I12 tipoClavePedido{integer} 60r35 125r83 140r87 232r23 341r19
-53R9 tipoInfoPedido 58e14 60r52
-54i7 dniCliente{30I12}
-55r7 fechaPedido{24|5R9}
-56r7 platos{27|19R9[48]}
-57f7 montoTotal{float}
-60K12 p_pedidos[20|12] 61r8 125r43 140r47 229r45 230r20 240r10 242r16 243r13
-. 245r13 248r22 251r49 253r20 264r10 266r16 267r13 269r13 272r19 277r114
-. 281r7 312r76 317r40 322r35 339r13
-70V13 obtenerNombreVianda{12|87R9} 70b13 73l8 73t27 164s26 181s26
-75V13 existeVianda{boolean} 75b13 75>26 75>59 78l8 78t20 166s13 183s13
-75r26 viandas{27|19R9[26]}
-75r59 nombreVianda{20R12}
-80V13 obtenerCantidad{integer} 80b13 83l8 83t23 169s25
-85U14 cargarViandaN 85b14 85=28 85>65 85>99 88l8 88t21 170s13
-85r28 viandas{27|19R9[26]}
-85r65 nombreVianda{20R12}
-85i99 cantidad{integer}
-90V13 obtenerPrecio{float} 90b13 93l8 93t21 184s23
-95U14 cargarPrecio 95b14 95=27 95>64 95>98 98l8 98t20 185s13
-95r27 viandas{27|19R9[26]}
-95r64 nombreVianda{20R12}
-95f98 precio{float}
-100V13 menuModificarViandas{integer} 100b13 103l8 103t28 197s18
-105U14 agregarCantidadVianda 105b14 105=36 108l8 108t29 199s23
-105r36 viandas{27|19R9[26]}
-110U14 quitarCantidadViandas 110b14 110=36 113l8 113t29 200s23
-110r36 viandas{27|19R9[26]}
-115U14 mostrarCabeceraListadosDia 115b14 118l8 118t34 234s7
-120U14 solicitarFecha 120b14 120<29 123l8 123t22 238s10
-120r29 fecha{24|5R9}
-125U14 mostrarPedidoDia 125b14 125>31 125>64 125>100 125>118 128l8 128t24
-. 244s13
-125p31 pedidos{20|21P9[60]}
-125i64 numeroDePedido{52I12}
-125r100 fecha{24|5R9}
-125p118 clientes{20|21P9[38]}
-130U14 mostrarCabeceraListadoPedidosCliente 130b14 133l8 133t44 257s7
-135V13 obtenerDireccion{12|87R9} 135b13 135>30 135>63 138l8 138t24 262s23
-135i30 dniCliente{30I12}
-135p63 clientes{20|21P9[38]}
-140U14 mostrarPedidoCliente 140b14 140>35 140>68 140>104 140>137 143l8 143t28
-. 268s13
-140p35 pedidos{20|21P9[60]}
-140i68 numeroDePedido{52I12}
-140i104 dniCliente{30I12}
-140r137 direccion{12|87R9}
-147V13 menuViandas{integer} 147b13 157l8 157t19 300s18
-159U14 cargarViandas 159b14 159=28 174l8 174t21 302s23
-159r28 viandas{27|19R9[26]} 166r26 170m27
-160r7 nombreVianda{20R12} 164m10 166r35 170r36
-161i7 cantidad{integer} 169m13 170r50
-176U14 cargarPrecio 176b14 176=27 191l8 191t20 303s23
-176r27 viandas{27|19R9[26]} 183r26 185m26
-177r7 nombreVianda{20R12} 181m10 183r35 185r35
-178f7 precio{float} 184m13 185r49
-193U14 menuModificarVianda 193b14 193=34 205l8 205t27 304s23
-193r34 viandas{27|19R9[26]} 199m45 200m45
-194i7 resp{integer} 197m10 198r15 203r20
-207U14 eliminarViandas 207b14 207=30 212l8 212t23 305s23
-207r30 viandas{27|19R9[26]} 210m17
-215V13 menuListados{integer} 215b13 223l8 223t20 326s18
-229U14 listarPedidosDeDia 229b14 229>33 229>66 249t7 328s23
-229p33 pedidos{20|21P9[60]} 235r18 240r28 244r30
-229p66 clientes{20|21P9[38]} 244r62
-230r7 colaPedidos{22|12R9[20|14[54|60]]} 240m37 240r37 242r49 243r45 245m49
-. 245r49
-231r7 fecha{24|5R9} 238m25 244r55
-232i7 numeroDePedido{52I12} 243m58 244r39
-251U14 listarPedidosDeCliente 251b14 251>37 251>70 273l8 273t30 329s23
-251p37 pedidos{20|21P9[60]} 258r18 264r28 268r34
-251p70 clientes{20|21P9[38]} 262r52
-252i7 dniCliente{integer} 261m10 262r40 268r59
-253r7 colaPedidos{22|12R9[20|14[54|60]]} 264m37 264r37 266r49 267r45 269m49
-. 269r49
-254i7 numeroDePedido{integer} 267m58 268r43
-255r7 direccion{12|87R9} 262m10 268r71
-277U14 crearEstructuras 277b14 277<31 277<67 277<101 282l8 282t24 346s4
-277p31 clientes{20|21P9[38]} 279m24
-277r67 viandas{27|19R9[26]} 280m23
-277p101 pedidos{20|21P9[60]} 281m23
-284V13 menuPrincipal{integer} 284b13 294l8 294t21 349s15
-296U14 administrarViandas 296b14 296=33 310l8 310t26 352s20
-296r33 viandas{27|19R9[26]} 302m37 303m36 304m43 305m39
-297i7 resp{integer} 300m10 301r15 308r20
-312U14 abmCliente 312b14 312=25 312>64 315l8 315t18 353s20
-312p25 clientes{20|21P9[38]}
-312p64 pedidos{20|21P9[60]}
-317U14 abmPedido 317b14 317=24 317=61 317>101 317>136 320l8 320t17 354s20
-317p24 pedidos{20|21P9[60]}
-317i61 identificador{30I12}
-317p101 clientes{20|21P9[38]}
-317r136 viandas{27|19R9[26]}
-322U14 listados 322b14 322>23 322>56 335l8 335t16 355s20
-322p23 pedidos{20|21P9[60]} 328r42 329r46
-322p56 clientes{20|21P9[38]} 328r51 329r55
-323i7 resp{integer} 326m10 327r15 333r20
-337r4 viandas{27|19R9[26]} 346m31 352m39 352r39 354r64
-338p4 clientes{20|21P9[38]} 346m21 346r21 353m31 353r31 354r54 355r38
-339p4 pedidos{20|21P9[60]} 346m40 346r40 353r41 354m30 354r30 355r29
-340r4 platos{27|19R9[48]}
-341i4 identificador{52I12} 345m4 354m39 354r39
-342i4 resp{integer} 349m7 351r12 359r16
-X 56 utiles.ads
-1K9*utiles 54|5w24 10r23 56|43e11
-6V13*confirma{boolean} 54|172s20 189s20 209s10
-11U14*continua 54|248s47 272s44
-16V13*numeroEnt{integer} 54|261s24
-26V13*enteroEnRango{integer} 54|156s14 222s14 293s14
+38K12 p_clientes[20|12] 39r8 274r76 281r131 405r79 427r83 453r45 455r7 488r42
+. 493r114 498r69 514r14
+42R12 tipoClavePlato{12|87R9} 48r34 126r14
+43R9 tipoInfoPlato 46e14 48r50 127r13
+44i7 cantidad{integer} 135r56
+45f7 precioIndividual{float} 135r104
+48K12 p_platos[27|8] 49r8 56r15 125r39 305r15
+52I12 tipoClavePedido{integer} 60r35 281r83 303r87 408r23 517r19
+53R9 tipoInfoPedido 58e14 60r52 282r13 306r13
+54i7 dniCliente{30I12} 290r45 310r32
+55r7 fechaPedido{24|5R9} 287r27 292r79
+56r7 platos{27|19R9[48]} 313r25
+57f7 montoTotal{float} 292r128 316r37 317r48
+60K12 p_pedidos[20|12] 61r8 281r43 303r47 405r45 406r20 416r10 418r16 419r13
+. 421r13 424r22 427r49 429r20 440r10 442r16 443r13 445r13 448r19 453r114
+. 457r7 488r76 493r40 498r35 515r13
+70U14 agregarCantidadInfo 70b14 70>34 70=68 86l8 86t27 232s13
+70r34 nombreVianda{20R12} 78r26 85r26
+70r68 viandas{27|19R9[26]} 78r17 85m17
+71i7 cantidadAAgregar{integer} 77m7 83r29
+72r7 info{21R9} 78m40 79r19 80r17 83r48
+73r7 nuevaInfo{21R9} 82m7 83m7 85r40
+74i7 cantidad{integer} 79m7
+75f7 precio{float} 80m7 82r37
+88U14 quitarCantidadInfo 88b14 88>33 88=67 112l8 112t26 248s13
+88r33 nombreVianda{20R12} 98r26 108r29
+88r67 viandas{27|19R9[26]} 98r17 108m20
+89i7 cantidadAQuitar{integer} 96m7 103r35
+90i7 nuevaCantidad{integer} 103m7 105r10 107r32
+91r7 info{21R9} 98m40 100r19 101r17
+92r7 nuevaInfo{21R9} 106m10 107m10 108r43
+93i7 cantidad{integer} 100m7 103r24
+94f7 precio{float} 101m7 106r40
+114V13 esMismaFecha{boolean} 114b13 114>26 114>51 117l8 117t20 289s10
+114r26 fechaDeseada{24|5R9} 116r16 116r57 116r98
+114r51 fechaPedido{24|5R9} 116r35 116r76 116r118
+120V13 esMismoDNI{boolean} 120b13 120>24 120>48 123l8 123t18 312s10
+120i24 dniCliente{integer} 122r14
+120i48 dniClienteActual{integer} 122r27
+125U14 mostrarPlatos 125b14 125>28 138l8 138t21 315s10
+125r28 platos{27|19R9[48]} 130r24 131r16 134r20 136r18
+126r7 clave{42R12} 131m24 134r28 135r14 136r26 136m33
+127r7 info{43R9} 134m35 135r51 135r99
+128i7 long{integer} 130m7 133r21
+133i11 num{integer}
+140V13 obtenerEnvio{float} 140b13 140>26 143l8 143t20 316s19
+140f26 montoTotal{float} 142r14
+152V13 obtenerNombreVianda{12|87R9} 152b13 155l8 155t27 229s26 245s26 340s26
+. 357s26
+157V13 existeVianda{boolean} 157b13 157>26 157>59 163l8 163t20 231s13 247s13
+. 342s13 359s13
+157r26 viandas{27|19R9[26]} 160r17
+157r59 nombreVianda{20R12} 160r26
+158r4 info{21R9} 160m40
+165V13 obtenerCantidad{integer} 165b13 173l8 173t23 345s25
+166i7 num{integer} 169m10 170r20 172r14
+175U14 cargarViandaN 175b14 175=28 175>65 175>99 187l8 187t21 346s13
+175r28 viandas{27|19R9[26]} 182m16
+175r65 nombreVianda{20R12} 182r25
+175i99 cantidad{integer} 179r24
+176f7 PRECIODEF{float} 180r32
+177r7 info{21R9} 179m7 180m7 182r39
+189V13 obtenerPrecio{float} 189b13 197l8 197t21 360s23
+190f7 num{float} 193m10 194r20 196r14
+199U14 cargarPrecio 199b14 199=27 199>64 199>98 213l8 213t20 361s13
+199r27 viandas{27|19R9[26]} 202r17 209m23
+199r64 nombreVianda{20R12} 202r26 209r32
+199f98 precio{float} 208r38
+200r7 info{21R9} 202m40 204r11 208m13 209r46
+215V13 menuModificarViandas{integer} 215b13 223l8 223t28 373s18
+225U14 agregarCantidadVianda 225b14 225=36 239l8 239t29 375s23
+225r36 viandas{27|19R9[26]} 231r26 232m47
+226r7 nombreVianda{20R12} 229m10 231r35 232r33
+241U14 quitarCantidadViandas 241b14 241=36 255l8 255t29 376s23
+241r36 viandas{27|19R9[26]} 247r26 248m46
+242r7 nombreVianda{20R12} 245m10 247r35 248r32
+257U14 mostrarCabeceraListadosDia 257b14 260l8 260t34 410s7
+262U14 solicitarFecha 262b14 262<29 272l8 272t22 414s10
+262r29 fecha{24|5R9} 266m10 267m10 268m10 270r36
+274V13 obtenerDireccion{string} 274b13 274>30 274>63 279l8 279t24 290s23
+. 438s23
+274i30 dniCliente{30I12} 277r24
+274p63 clientes{20|21P9[38]} 277r14
+275r7 info{31R9} 277m36 278r24
+281U14 mostrarPedidoDia 281b14 281>31 281>64 281>100 281>118 294l8 294t24
+. 420s13
+281p31 pedidos{20|21P9[60]} 286r14
+281i64 numeroDePedido{52I12} 286r23 292r28
+281r100 fecha{24|5R9} 289r23
+281p118 clientes{20|21P9[38]} 290r57
+282r7 info{53R9} 286m39 287r22 290r40 292r74 292r123
+283r7 fechaPedido{24|5R9} 287m7 289r30
+284a7 direccion{string} 290m10 292r167
+296U14 mostrarCabeceraListadoPedidosCliente 296b14 299l8 299t44 433s7
+303U14 mostrarPedidoCliente 303b14 303>35 303>68 303>104 303>137 319l8 319t28
+. 444s13
+303p35 pedidos{20|21P9[60]} 309r14
+303i68 numeroDePedido{52I12} 309r23
+303i104 dniCliente{30I12} 312r21 314r28
+303a137 direccion{string} 314r46
+304i7 dniClienteActual{integer} 310m7 312r33
+305r7 platos{27|19R9[48]} 313m10 315r24
+306r7 info{53R9} 309m39 310r27 313r20 316r32 317r43
+307f7 envio{float} 316m10 317r98
+323V13 menuViandas{integer} 323b13 333l8 333t19 476s18
+335U14 cargarViandas 335b14 335=28 350l8 350t21 478s23
+335r28 viandas{27|19R9[26]} 342r26 346m27
+336r7 nombreVianda{20R12} 340m10 342r35 346r36
+337i7 cantidad{integer} 345m13 346r50
+352U14 cargarPrecio 352b14 352=27 367l8 367t20 479s23
+352r27 viandas{27|19R9[26]} 359r26 361m26
+353r7 nombreVianda{20R12} 357m10 359r35 361r35
+354f7 precio{float} 360m13 361r49
+369U14 menuModificarVianda 369b14 369=34 381l8 381t27 480s23
+369r34 viandas{27|19R9[26]} 375m45 376m45
+370i7 resp{integer} 373m10 374r15 379r20
+383U14 eliminarViandas 383b14 383=30 388l8 388t23 481s23
+383r30 viandas{27|19R9[26]} 386m17
+391V13 menuListados{integer} 391b13 399l8 399t20 502s18
+405U14 listarPedidosDeDia 405b14 405>33 405>66 425t7 504s23
+405p33 pedidos{20|21P9[60]} 411r18 416r28 420r30
+405p66 clientes{20|21P9[38]} 420r62
+406r7 colaPedidos{22|12R9[20|14[56|60]]} 416m37 416r37 418r49 419r45 421m49
+. 421r49
+407r7 fecha{24|5R9} 414m25 420r55
+408i7 numeroDePedido{52I12} 419m58 420r39
+427U14 listarPedidosDeCliente 427b14 427>37 427>70 449l8 449t30 505s23
+427p37 pedidos{20|21P9[60]} 434r18 440r28 444r34
+427p70 clientes{20|21P9[38]} 438r52
+428i7 dniCliente{integer} 437m10 438r40 444r59
+429r7 colaPedidos{22|12R9[20|14[56|60]]} 440m37 440r37 442r49 443r45 445m49
+. 445r49
+430i7 numeroDePedido{integer} 443m58 444r43
+431a7 direccion{string} 438m10 444r71
+453U14 crearEstructuras 453b14 453<31 453<67 453<101 458l8 458t24 522s4
+453p31 clientes{20|21P9[38]} 455m24
+453r67 viandas{27|19R9[26]} 456m23
+453p101 pedidos{20|21P9[60]} 457m23
+460V13 menuPrincipal{integer} 460b13 470l8 470t21 525s15
+472U14 administrarViandas 472b14 472=33 486l8 486t26 528s20
+472r33 viandas{27|19R9[26]} 478m37 479m36 480m43 481m39
+473i7 resp{integer} 476m10 477r15 484r20
+488U14 abmCliente 488b14 488=25 488>64 491l8 491t18 529s20
+488p25 clientes{20|21P9[38]}
+488p64 pedidos{20|21P9[60]}
+493U14 abmPedido 493b14 493=24 493=61 493>101 493>136 496l8 496t17 530s20
+493p24 pedidos{20|21P9[60]}
+493i61 identificador{30I12}
+493p101 clientes{20|21P9[38]}
+493r136 viandas{27|19R9[26]}
+498U14 listados 498b14 498>23 498>56 511l8 511t16 531s20
+498p23 pedidos{20|21P9[60]} 504r42 505r46
+498p56 clientes{20|21P9[38]} 504r51 505r55
+499i7 resp{integer} 502m10 503r15 509r20
+513r4 viandas{27|19R9[26]} 522m31 528m39 528r39 530r64
+514p4 clientes{20|21P9[38]} 522m21 522r21 529m31 529r31 530r54 531r38
+515p4 pedidos{20|21P9[60]} 522m40 522r40 529r41 530m30 530r30 531r29
+517i4 identificador{52I12} 521m4 530m39 530r39
+518i4 resp{integer} 525m7 527r12 535r16
+X 58 utiles.ads
+1K9*utiles 56|5w24 10r23 58|43e11
+6V13*confirma{boolean} 56|237s20 253s20 348s20 365s20 385s10
+11U14*continua 56|424s47 448s44
+16V13*numeroEnt{integer} 56|77s27 96s26 169s17 437s24
+21V13*numeroReal{float} 56|193s17
+26V13*enteroEnRango{integer} 56|222s14 266s23 267s23 268s24 332s14 398s14
+. 469s14
+36V13*textoNoVacio{string} 56|154s34
 

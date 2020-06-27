@@ -65,81 +65,257 @@ procedure Tpfinal is
    --package p_cola is new cola(tipoInfoCola);
    --use p_cola;
 
+   ---------------------------------------------- N4 ---------------------------------------
 
-   ---------------------------------------------- N3 --------------------------------
+   procedure agregarCantidadInfo(nombreVianda: in tipoClaveVianda; viandas: in out p_viandas.tipoLista) is -- Cambiar en pseudoCodigo
+      cantidadAAgregar: Integer;
+      info: tipoInfoVianda;
+      nuevaInfo: tipoInfoVianda;
+      cantidad: Integer;
+      precio: Float;
+   begin
+      cantidadAAgregar := numeroEnt("Ingrese la cantidad a agregar");
+      recuClave(viandas, nombreVianda, info);
+      cantidad := info.cantidad;
+      precio := info.precioIndividual;
+
+      nuevaInfo.precioIndividual := precio;
+      nuevaInfo.cantidad := cantidadAAgregar + info.cantidad;   -- modificar(viandas, nombreVianda, info);
+
+      modificar(viandas, nombreVianda, nuevaInfo);
+   end agregarCantidadInfo;
+
+   procedure quitarCantidadInfo(nombreVianda: in tipoClaveVianda; viandas: in out p_viandas.tipoLista) is     -- Cambiar en pseudocodigo
+      cantidadAQuitar: Integer;
+      nuevaCantidad: Integer;
+      info: tipoInfoVianda;
+      nuevaInfo: tipoInfoVianda;
+      cantidad: Integer;
+      precio: Float;
+   begin
+      cantidadAQuitar := numeroEnt("Ingrese la cantidad a quitar");
+
+      recuClave(viandas, nombreVianda, info);
+
+      cantidad := info.cantidad;
+      precio := info.precioIndividual;
+
+      nuevaCantidad := cantidad - cantidadAQuitar;
+
+      if nuevaCantidad >= 0 then
+         nuevaInfo.precioIndividual := precio;
+         nuevaInfo.cantidad := nuevaCantidad;
+         modificar(viandas, nombreVianda, nuevaInfo);
+      else
+         Put_Line("No se puede quitar esa cantidad de viandas");
+      end if;
+   end quitarCantidadInfo;
+
+   function esMismaFecha(fechaDeseada: in tFecha; fechaPedido: in tFecha) return boolean is
+   begin
+      return ((fechaDeseada.dia = fechaPedido.dia) and (fechaDeseada.mes = fechaPedido.mes) and (fechaDeseada.anio = fechaPedido.anio));
+   end esMismaFecha;
+
+
+   function esMismoDNI(dniCliente: in integer; dniClienteActual: in integer) return boolean is
+   begin
+      return dniCliente = dniClienteActual;
+   end esMismoDNI;
+
+   procedure mostrarPlatos(platos: in p_platos.tipoLista) is
+      clave: tipoClavePlato;
+      info: tipoInfoPlato;
+      long: Integer;
+   begin
+      long := longitud(platos);      -- ADT LO
+      recuPrim(platos, clave);
+
+      for num in 1..long loop
+         recuClave(platos, clave, info);
+         Put(clave);Put("    ");Put(Integer'image(info.cantidad));Put("        ");Put(Float'Image(info.precioIndividual));New_Line;
+         recuSig(platos, clave, clave);
+      end loop;
+   end mostrarPlatos;
+
+   function obtenerEnvio(montoTotal: in Float) return Float is
+   begin
+      return montoTotal * 0.1;
+   end obtenerEnvio;
+
+
+
+
+
+
+
+   ---------------------------------------------- N3 -------------F-------------------
    function obtenerNombreVianda return Unbounded_String is
    begin
-      return To_Unbounded_String("Javier");
+      return To_Unbounded_String(textoNoVacio("Ingrese el nombre de la vianda"));
    end obtenerNombreVianda;
 
    function existeVianda(viandas: in p_viandas.tipoLista; nombreVianda: in tipoClaveVianda) return Boolean is
+   info: tipoInfoVianda;
    begin
+      recuClave(viandas, nombreVianda, info);     -- ADT LO
       return True;
+      exception when p_viandas.claveNoExiste => return False;
    end existeVianda;
 
    function obtenerCantidad return Integer is
+      num: Integer;
    begin
-      return 0;
+      loop
+         num := numeroEnt("Ingrese la cantidad de viandas");
+         exit when num > 0;
+      end loop;
+      return num;
    end obtenerCantidad;
 
    procedure cargarViandaN(viandas: in out p_viandas.tipoLista; nombreVianda: in tipoClaveVianda; cantidad: in Integer) is
+      PRECIODEF : constant Float := -1.0;
+      info: tipoInfoVianda;
    begin
-      null;
+      info.cantidad := cantidad;
+      info.precioIndividual := PRECIODEF;
+
+      insertar(viandas, nombreVianda, info);      -- ADT LO
+
+   exception
+      when p_viandas.claveExiste => Put_Line("Esa vianda ya esta cargada");
+      when p_viandas.listaLlena => Put_Line("Ocurrio un error inesperado, intente mas tarde");
    end cargarViandaN;
 
    function obtenerPrecio return float is
+      num: Float;
    begin
-      return 1.1;
+      loop
+         num := numeroReal("Ingrese el precio");
+         exit when num > 0.0;
+      end loop;
+      return num;
    end obtenerPrecio;
 
    procedure cargarPrecio(viandas: in out p_viandas.tipoLista; nombreVianda: in tipoClaveVianda; precio: in Float) is
+      info: tipoInfoVianda;
    begin
-      null;
+      recuClave(viandas, nombreVianda, info);       -- ADT LO
+
+      if (info.precioIndividual /= -1.0) then
+         Put_Line("El precio de esta vianda ya esta cargado");
+      else
+         begin
+            info.precioIndividual := precio;
+            modificar(viandas, nombreVianda, info);      -- ADT LO
+         exception when p_viandas.listaLlena => Put_Line("Ocurrio un error inesperado, intente mas tarde");
+         end;
+      end if;
    end cargarPrecio;
 
    function menuModificarViandas return Integer is
    begin
-      return 0;
+      Put_Line("Menu modificacion de viandas");
+      Put_Line("1: Añadir cantidad Viandas");
+      Put_Line("2: Eliminar cantidad de viandas");
+      Put_Line("0: Volver");
+
+      return enteroEnRango("Ingrese una opcion: ", 0, 2);
    end menuModificarViandas;
 
    procedure agregarCantidadVianda(viandas: in out p_viandas.tipoLista) is
+      nombreVianda: tipoClaveVianda;
    begin
-      null;
+      loop
+         nombreVianda := obtenerNombreVianda;      -- N3 listo
+
+         if existeVianda(viandas, nombreVianda) then       -- N3 listo
+            agregarCantidadInfo(nombreVianda, viandas);      -- N4
+            --modificar(viandas, nombreVianda, nuevaInfo);      -- U
+         else
+            Put_Line("Esa vianda no esta cargada");
+         end if;
+         exit when confirma("Desea modificar otra (cantidad) vianda?") = False; --U
+      end loop;
    end agregarCantidadVianda;
 
    procedure quitarCantidadViandas(viandas: in out p_viandas.tipoLista) is
+      nombreVianda: tipoClaveVianda;
    begin
-      null;
+      loop
+         nombreVianda := obtenerNombreVianda;       -- N3 listo
+
+         if existeVianda(viandas, nombreVianda) then    -- N3 listo
+            quitarCantidadInfo(nombreVianda, viandas);    -- N4
+            --modificar(viandas, nombreVianda, nuevaInfo);
+         else
+            Put_Line("Esa vianda no esta cargada");
+         end if;
+         exit when confirma("¿Desea modificar otra (cantidad) vianda?") = False;
+      end loop;
    end quitarCantidadViandas;
 
    procedure mostrarCabeceraListadosDia is
    begin
-      null;
+      Put_Line("ID        DIA        PRECIO                Direccion");
    end mostrarCabeceraListadosDia;
 
    procedure solicitarFecha(fecha: out tFecha) is
+      --fecha: tFecha;
    begin
-      null;
+      loop
+         fecha.dia := enteroEnRango("Ingrese el dia", 0, 31);     -- Fechas
+         fecha.mes := enteroEnRango("Ingrese el mes", 0, 12);     -- Fechas
+         fecha.anio := enteroEnRango("Ingrese el año", 2000, 2020);  -- Fechas
+
+         exit when esFechaCorrecta(fecha) = True;
+      end loop;
    end solicitarFecha;
 
-   procedure mostrarPedidoDia(pedidos: in p_pedidos.tipoArbol; numeroDePedido: in tipoClavePedido; fecha: in tFecha; clientes: in p_clientes.tipoArbol) is
+   function obtenerDireccion(dniCliente: in tipoClaveCliente; clientes: in p_clientes.tipoArbol) return String is
+      info: tipoInfoCliente;
    begin
-      null;
+      buscar(clientes, dniCliente, info);     -- ADT ABB
+      return To_String(info.direccion);
+   end obtenerDireccion;
+
+   procedure mostrarPedidoDia(pedidos: in p_pedidos.tipoArbol; numeroDePedido: in tipoClavePedido; fecha: in tFecha; clientes: in p_clientes.tipoArbol) is
+      info: tipoInfoPedido;
+      fechaPedido: tFecha;
+      direccion: String:="";
+   begin
+      buscar(pedidos, numeroDePedido, info);                           -- ADT ABB
+      fechaPedido := info.fechaPedido;
+
+      if esMismaFecha(fecha, fechaPedido) then                        -- N4
+         direccion := obtenerDireccion(info.dniCliente, clientes);    -- N4
+         --Put_Line(Integer'image(numeroDePedido) & "    " & fechatexto(info.fechaPedido) & "    " & To_String(Float'image(info.montoTotal)) & "            " & To_String(direccion)));
+         Put(Integer'Image(numeroDePedido)); Put("    "); Put(fechaTexto(info.fechaPedido)); Put("    "); Put(Float'Image(info.montoTotal)); Put("            "); Put(direccion); New_Line;
+      end if;
    end mostrarPedidoDia;
 
    procedure mostrarCabeceraListadoPedidosCliente is
    begin
-      null;
+      Put_Line("DNI            DIRECCION        PLATO            CANTIDAD        PRECIO");
    end mostrarCabeceraListadoPedidosCliente;
 
-   function obtenerDireccion(dniCliente: in tipoClaveCliente; clientes: in p_clientes.tipoArbol) return Unbounded_String is
-   begin
-      return To_Unbounded_String("Javier");
-   end obtenerDireccion;
 
-   procedure mostrarPedidoCliente(pedidos: in p_pedidos.tipoArbol; numeroDePedido: in tipoClavePedido; dniCliente: in tipoClaveCliente; direccion: in Unbounded_String) is
+
+   procedure mostrarPedidoCliente(pedidos: in p_pedidos.tipoArbol; numeroDePedido: in tipoClavePedido; dniCliente: in tipoClaveCliente; direccion: in String) is
+      dniClienteActual: Integer;
+      platos: p_platos.tipoLista;
+      info: tipoInfoPedido;
+      envio: Float;
    begin
-      null;
+      buscar(pedidos, numeroDePedido, info);
+      dniClienteActual := info.dniCliente;
+
+      if esMismoDNI(dniCliente, dniClienteActual) then              -- N4
+         platos := info.platos;
+         Put(Integer'Image(dniCliente)); Put(direccion); New_Line;
+         mostrarPlatos(platos);                                     -- N4
+         envio := obtenerEnvio(info.montoTotal);                    -- N4
+         Put("TOTAL:  "); Put(Float'Image(info.montoTotal)); Put("  ENVIO:   "); Put(Float'Image(envio)); New_Line;
+      end if;
    end mostrarPedidoCliente;
 
    ---------------------------------------------- N2 --------------------------------
@@ -252,7 +428,7 @@ procedure Tpfinal is
       dniCliente: Integer;
       colaPedidos: p_pedidos.ColaRecorridos.tipoCola;
       numeroDePedido: Integer;
-      direccion: Unbounded_String;
+      direccion: String:="";
    begin
       mostrarCabeceraListadoPedidosCliente;             -- N3
       if esVacio(pedidos) then
@@ -337,7 +513,7 @@ procedure Tpfinal is
    viandas: p_viandas.tipoLista;
    clientes: p_clientes.tipoArbol;
    pedidos: p_pedidos.tipoArbol;
-   platos: p_platos.tipoLista;
+   --platos: p_platos.tipoLista;
    identificador: tipoClavePedido;
    resp: Integer;
 begin
