@@ -215,11 +215,12 @@ package body lista is
       procedure free is new unchecked_deallocation(tipoNodo, tipoPunt);
       p:tipoPunt;
    begin
-      while (p/= null) loop
+
+      while (l.lista /= null) loop
          p := l.lista;
+
          l.lista:=l.lista.sig;
          free(p);
-
       end loop;
       l.long:=0;
    end vaciar;

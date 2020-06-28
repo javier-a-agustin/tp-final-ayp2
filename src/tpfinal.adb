@@ -142,12 +142,6 @@ procedure Tpfinal is
       return montoTotal * 0.1;
    end obtenerEnvio;
 
-
-
-
-
-
-
    ---------------------------------------------- N3 -------------F-------------------
    function obtenerNombreVianda return Unbounded_String is
    begin
@@ -381,12 +375,15 @@ procedure Tpfinal is
    end menuModificarVianda;
 
    procedure eliminarViandas(viandas: in out p_viandas.tipoLista) is
+      long: Integer;
    begin
       if confirma("¿Desea eliminar TODAS las viandas?") then
-         vaciar(viandas);
+         p_viandas.vaciar(viandas);
       end if;
-   end eliminarViandas;
+      long := longitud(viandas);
+      put(Integer'image(long));
 
+   end eliminarViandas;
 
    function menuListados return Integer is
    begin
@@ -450,7 +447,7 @@ procedure Tpfinal is
 
 
    ---------------------------------------------- N1 --------------------------------
-   procedure crearEstructuras(clientes: out p_clientes.tipoArbol; viandas: out p_viandas.tipoLista; pedidos: out p_pedidos.tipoArbol) is
+   procedure crearEstructuras(clientes: out p_clientes.tipoArbol; viandas: in out p_viandas.tipoLista; pedidos: out p_pedidos.tipoArbol) is
    begin
       p_clientes.crear(clientes);
       p_viandas.crear(viandas);
@@ -471,6 +468,7 @@ procedure Tpfinal is
 
    procedure administrarViandas(viandas: in out p_viandas.tipoLista) is
       resp: Integer;
+      long: Integer;
    begin
       loop
          resp := menuViandas;                        -- N2
@@ -482,6 +480,8 @@ procedure Tpfinal is
             when others => null;
          end case;
          exit when resp = 0;
+         long := longitud(viandas);
+         Put("Longitud de las viandas");Put(Integer'image(long));New_Line;
       end loop;
    end administrarViandas;
 
