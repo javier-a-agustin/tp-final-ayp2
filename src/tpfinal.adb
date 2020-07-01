@@ -60,10 +60,6 @@ procedure Tpfinal is
    package p_pedidos is new arbol(tipoClavePedido, tipoInfoPedido, ">", "<", "=");
    use p_pedidos;
 
-   --Colas
-   --subtype tipoInfoCola is Integer;
-   --package p_cola is new cola(tipoInfoCola);
-   --use p_cola;
 
    ---------------------------------------------- N4 ---------------------------------------
 
@@ -143,6 +139,94 @@ procedure Tpfinal is
    end obtenerEnvio;
 
    ---------------------------------------------- N3 -------------F-------------------
+
+   function obtenerDNI return tipoClaveCliente is
+      dni : tipoClaveCliente;
+   begin
+      loop
+         dni := numeroEnt("Ingrese el DNI del cliente");    -- UTILES
+         exit when dni > 0;
+      end loop;
+      return dni;
+   end obtenerDNI;
+
+   function existeCliente(clientes: in p_clientes.tipoArbol; dni: in tipoClaveCliente) return boolean is
+      info : tipoInfoCliente;
+   begin
+      begin
+         buscar(clientes, dni, info);    -- ADT ABB
+         return True;
+      exception
+         when p_clientes.claveNoExiste => return False;--Put_line("No existe el cliente");
+
+      end;
+   end existeCliente;
+
+   procedure obtenerInfoCliente(info: out tipoInfoCliente) is
+   begin
+      info.nombre := To_Unbounded_String(textoNoVacio("Ingrese el nombre del cliente"));
+      info.apellido := To_Unbounded_String(textoNoVacio("Ingrese el apelllido del cliente"));
+      info.telefono := To_Unbounded_String(textoNoVacio("Ingrese el telefono del cliente"));
+      info.direccion := To_Unbounded_String(textoNoVacio("Ingrese la direccion del cliente"));
+   end obtenerInfoCliente;
+
+   procedure guardarCliente(cliente: in out p_clientes.tipoArbol; dni: in tipoClaveCliente; info: in tipoInfoCliente) is
+   begin
+      begin
+         insertar(cliente, dni, info);     -- ADT ABB
+      exception
+         when p_clientes.arbolLleno => Put_Line("Ocurrio un error inesperado, reintente mas tarde");
+      end;
+   end guardarCliente;
+
+   procedure modificacionCliente(cliente: in out p_clientes.tipoArbol; dni: in tipoClaveCliente; info: in tipoInfoCliente) is
+   begin
+      begin
+         modificar(cliente, dni, info);     -- ADT ABB
+      exception
+         when p_clientes.claveNoExiste => Put_Line("Ocurrio un error inesperado, intente mas tarde");
+      end;
+   end modificacionCliente;
+
+   procedure eliminarCliente(clientes: in out p_clientes.tipoArbol; dni: in tipoClaveCliente) is
+   begin
+      begin
+         suprimir(clientes, dni);       -- ADT ABB
+      exception
+         when p_clientes.claveNoExiste => Put_Line("Ocurrio un error inesperado, intente mas tarde");
+      end;
+   end eliminarCliente;
+
+   function clienteTienePedidos(pedidos: in p_pedidos.tipoArbol; dni: in tipoClaveCliente) return Boolean is
+      q : p_pedidos.ColaRecorridos.tipoCola;
+      k : tipoClavePedido;
+      encontrado : Boolean;
+      i : tipoInfoPedido;
+   begin
+      p_pedidos.ColaRecorridos.crear(q);          -- ADT Cola
+      postOrder(pedidos, q);       -- ADT Cola
+      loop
+
+
+         p_pedidos.ColaRecorridos.frente(q, k);           -- ADT Cola
+         p_pedidos.buscar(pedidos, k, i);
+         If i.dniCliente = dni then
+            encontrado := True;
+         end if;
+         p_pedidos.ColaRecorridos.desencolar(q);            -- ADT Cola
+
+         exit when p_pedidos.ColaRecorridos.esVacia(q) = True or encontrado = True;
+
+
+      end loop;
+      exception when p_pedidos.ColaRecorridos.colaVacia => null;
+      If encontrado = True then
+         return True;
+      else
+         return False;
+      end If;
+   end clienteTienePedidos;
+
    function obtenerNombreVianda return Unbounded_String is
    begin
       return To_Unbounded_String(textoNoVacio("Ingrese el nombre de la vianda"));
@@ -190,7 +274,7 @@ procedure Tpfinal is
       return num;
    end obtenerPrecio;
 
-   procedure cargarPrecio(viandas: in out p_viandas.tipoLista; nombreVianda: in tipoClaveVianda; precio: in Float) is
+   procedure cargarPrecioN(viandas: in out p_viandas.tipoLista; nombreVianda: in tipoClaveVianda; precio: in Float) is
       info: tipoInfoVianda;
    begin
       recuClave(viandas, nombreVianda, info);       -- ADT LO
@@ -204,7 +288,7 @@ procedure Tpfinal is
          exception when p_viandas.listaLlena => Put_Line("Ocurrio un error inesperado, intente mas tarde");
          end;
       end if;
-   end cargarPrecio;
+   end cargarPrecioN;
 
    function menuModificarViandas return Integer is
    begin
@@ -224,7 +308,6 @@ procedure Tpfinal is
 
          if existeVianda(viandas, nombreVianda) then       -- N3 listo
             agregarCantidadInfo(nombreVianda, viandas);      -- N4
-            --modificar(viandas, nombreVianda, nuevaInfo);      -- U
          else
             Put_Line("Esa vianda no esta cargada");
          end if;
@@ -240,7 +323,6 @@ procedure Tpfinal is
 
          if existeVianda(viandas, nombreVianda) then    -- N3 listo
             quitarCantidadInfo(nombreVianda, viandas);    -- N4
-            --modificar(viandas, nombreVianda, nuevaInfo);
          else
             Put_Line("Esa vianda no esta cargada");
          end if;
@@ -282,7 +364,6 @@ procedure Tpfinal is
 
       if esMismaFecha(fecha, fechaPedido) then                        -- N4
          direccion := obtenerDireccion(info.dniCliente, clientes);    -- N4
-         --Put_Line(Integer'image(numeroDePedido) & "    " & fechatexto(info.fechaPedido) & "    " & To_String(Float'image(info.montoTotal)) & "            " & To_String(direccion)));
          Put(Integer'Image(numeroDePedido)); Put("    "); Put(fechaTexto(info.fechaPedido)); Put("    "); Put(Float'Image(info.montoTotal)); Put("            "); Put(direccion); New_Line;
       end if;
    end mostrarPedidoDia;
@@ -313,6 +394,71 @@ procedure Tpfinal is
    end mostrarPedidoCliente;
 
    ---------------------------------------------- N2 --------------------------------
+
+
+
+   function menuABMClientes return integer is
+   begin
+      Put_line ("Menu modulo Clientes");
+      Put_line ("1: Alta Cliente");
+      Put_line ("2: Modificar Cliente");
+      Put_line ("3: Baja Cliente");
+      Put_line ("0: Volver");
+
+      return enteroEnRango("Ingrese una opcion", 0, 3);     -- UTILES
+   end menuABMClientes;
+
+   procedure altaCliente(clientes: in out p_clientes.tipoArbol) is
+      dni : tipoClaveCliente;
+      info : tipoInfoCliente;
+   begin
+      loop
+	dni := obtenerDNI; 							-- N3
+	If existeCliente(clientes, dni) then			-- N3
+            Put_line ("El DNI del cliente se encuentra cargado");
+	else
+            obtenerInfoCliente(info); 					-- N3
+            guardarCliente(clientes, dni, info);			-- N3
+	end if;
+	exit when not confirma("Desea ingresar otro cliente?");  		-- UTILES
+      end loop;
+   end altaCliente;
+
+   procedure modificarCliente(clientes: in out p_clientes.tipoArbol) is
+      dni : tipoClaveCliente;
+      info: tipoInfoCliente;
+   begin
+      loop
+         dni := obtenerDNI;	 				-- N3
+         If existeCliente(clientes, dni) = False then            -- N3
+            Put_line("El cleinte no existe");
+         else
+            obtenerInfoCliente(info); 					-- N3
+            modificacionCliente(clientes, dni, info);	 			 -- N3
+         end if;
+         exit when confirma("Desea modificar otro cliente?") = False;       -- UTILES
+      end loop;
+   end modificarCliente;
+
+   procedure bajaCliente(clientes: in out p_clientes.tipoArbol; pedidos: in p_pedidos.tipoArbol) is
+      dni: tipoClaveCliente;
+      info: tipoInfoCliente;
+   begin
+      loop
+         dni := obtenerDNI; 	                                -- N3
+         If existeCliente(clientes, dni) = False then	      -- N3
+            Put_line("El cliente no existe");
+         else
+            If clienteTienePedidos(pedidos, dni) = True then        -- N3
+               Put_line("El cliente tiene pedidos cargados, no puede darlo de baja");
+            else
+               eliminarCliente(clientes, dni);				-- N3
+            end if;
+         end if;
+         exit when confirma("Desea dar de baja otro cliente") = False;  			-- UTILES
+      end loop;
+   end bajaCliente;
+
 
    function menuViandas return Integer is
    begin
@@ -352,7 +498,7 @@ procedure Tpfinal is
 
          if existeVianda(viandas, nombreVianda) then
             precio := obtenerPrecio;                       -- N3
-            cargarPrecio(viandas, nombreVianda, precio);  -- N3 ----------
+            cargarPrecioN(viandas, nombreVianda, precio);  -- N3 ----------
          else
             Put_Line("Esa vianda no existe");
          end if;
@@ -375,14 +521,10 @@ procedure Tpfinal is
    end menuModificarVianda;
 
    procedure eliminarViandas(viandas: in out p_viandas.tipoLista) is
-      long: Integer;
    begin
       if confirma("¿Desea eliminar TODAS las viandas?") then
          p_viandas.vaciar(viandas);
       end if;
-      long := longitud(viandas);
-      put(Integer'image(long));
-
    end eliminarViandas;
 
    function menuListados return Integer is
@@ -398,7 +540,6 @@ procedure Tpfinal is
 
 
 
-   -- Consultar sobre la cola en este caso. la cola solo vive dentro del procedimiento??
    procedure listarPedidosDeDia(pedidos: in p_pedidos.tipoArbol; clientes: in p_clientes.tipoArbol) is
       colaPedidos: p_pedidos.ColaRecorridos.tipoCola; -------------------------
       fecha: tFecha;
@@ -409,13 +550,12 @@ procedure Tpfinal is
          Put_Line("No hay pedidos para mostrar");
       else
          solicitarFecha(fecha);            -- N3
-         --p_cola.crear(colaPedidos);        -- ADT COLA
-         p_pedidos.inOrder(pedidos, colaPedidos);    -- U
+         p_pedidos.inOrder(pedidos, colaPedidos);    -- ADT ABB
 
-         while p_pedidos.ColaRecorridos.esVacia(colaPedidos) /= True loop       -- U
-            p_pedidos.ColaRecorridos.frente(colaPedidos, numeroDePedido);       -- U
-            mostrarPedidoDia(pedidos, numeroDePedido, fecha, clientes);
-            p_pedidos.ColaRecorridos.desencolar(colaPedidos);
+         while p_pedidos.ColaRecorridos.esVacia(colaPedidos) /= True loop       -- ADT COLA
+            p_pedidos.ColaRecorridos.frente(colaPedidos, numeroDePedido);       -- ADT COLA
+            mostrarPedidoDia(pedidos, numeroDePedido, fecha, clientes);         -- N3
+            p_pedidos.ColaRecorridos.desencolar(colaPedidos);                   -- ADT COLA
          end loop;
       end if;
       exception when p_pedidos.errorEnCola => continua("Ocurrio un error, intente mas tarde");
@@ -433,13 +573,12 @@ procedure Tpfinal is
       else
          dniCliente := numeroEnt("Ingrese el dni del cliente deseado");    -- U
          direccion := obtenerDireccion(dniCliente, clientes);                 -- N3
-         --p_cola.crear(colaPedidos);                                          -- ADT COLA
          p_pedidos.inOrder(pedidos, colaPedidos);                                      -- ADT ABB
 
-         while p_pedidos.ColaRecorridos.esVacia(colaPedidos) /= True loop     -- U
+         while p_pedidos.ColaRecorridos.esVacia(colaPedidos) /= True loop     -- ADT COLA
             p_pedidos.ColaRecorridos.frente(colaPedidos, numeroDePedido);     -- ADT COLA
             mostrarPedidoCliente(pedidos, numeroDePedido, dniCliente, direccion);      -- N3
-            p_pedidos.ColaRecorridos.desencolar(colaPedidos);                                                   -- ADT COLA
+            p_pedidos.ColaRecorridos.desencolar(colaPedidos);                        -- ADT COLA                                        -- ADT COLA
          end loop;
       end if;
    exception when p_pedidos.errorEnCola => continua("Ocurrio un error, intente mas tarde");
@@ -468,7 +607,6 @@ procedure Tpfinal is
 
    procedure administrarViandas(viandas: in out p_viandas.tipoLista) is
       resp: Integer;
-      long: Integer;
    begin
       loop
          resp := menuViandas;                        -- N2
@@ -480,14 +618,22 @@ procedure Tpfinal is
             when others => null;
          end case;
          exit when resp = 0;
-         long := longitud(viandas);
-         Put("Longitud de las viandas");Put(Integer'image(long));New_Line;
       end loop;
    end administrarViandas;
 
    procedure abmCliente(clientes: in out p_clientes.tipoArbol; pedidos: in p_pedidos.tipoArbol) is
+      resp : integer;
    begin
-      null;
+      loop
+         resp := menuABMClientes;                    -- N2
+         case resp is
+            when 1 => altaCliente(clientes);             -- N2
+            when 2 => modificarCliente(clientes);        -- N2
+            when 3 => bajaCliente(clientes, pedidos);             -- N2
+            when others => null;
+         end case;
+         exit when resp = 0;
+      end loop;
    end abmCliente;
 
    procedure abmPedido(pedidos: in out p_pedidos.tipoArbol; identificador: in out tipoClaveCliente; clientes: in p_clientes.tipoArbol; viandas: in p_viandas.tipoLista) is
@@ -513,7 +659,6 @@ procedure Tpfinal is
    viandas: p_viandas.tipoLista;
    clientes: p_clientes.tipoArbol;
    pedidos: p_pedidos.tipoArbol;
-   --platos: p_platos.tipoLista;
    identificador: tipoClavePedido;
    resp: Integer;
 begin
