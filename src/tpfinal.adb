@@ -62,11 +62,11 @@ procedure Tpfinal is
    
    ---------------------------------------------- N4 ---------------------------------------
 
-   function existePlato(platos: in tipoListaPlatos, nombre: in tipoClavePlato) return boolean is
+   function existePlato(platos: in p_platos.tipoLista; nombre: in tipoClavePlato) return boolean is
       info: tipoInfoPlato;
    begin
       begin
-         recuClave(platos, nombre, info); --ADT LO
+         p_platos.recuClave(platos, nombre, info); --ADT LO
          return True;
       exception
          when p_platos.claveNoExiste => return False;
@@ -75,7 +75,7 @@ procedure Tpfinal is
 
    ---------------------------------------------- N4 ---------------------------------------
    
-   procedure cargarPlatos (platos: in out tipoListaPlatos, viandas: in tipoListaViandas, total: in out Float)
+   procedure cargarPlatos (platos: in out p_platos.tipoLista; viandas: in p_viandas.tipoLista; total: in out Float)
       vianda: tipoInfoVianda;
       plato: tipoClavePlato;
       info: tipoInfoPlato;
@@ -86,7 +86,7 @@ procedure Tpfinal is
          plato := textoNoVacio("Ingrese el nombre del plato que desea agregar al pedido: ");  --U
 
          if existeVianda(viandas, plato) then                                                 --N3
-            vianda := recuClave(viandas, plato, vianda);                                      --ADT LO
+            vianda := p_platos.recuClave(viandas, plato, vianda);                                      --ADT LO
 
             existe := existePlato(platos, plato);                                             --N5
             if existe then
@@ -126,7 +126,7 @@ procedure Tpfinal is
       precio: Float;
    begin
       cantidadAAgregar := numeroEnt("Ingrese la cantidad a agregar");
-      recuClave(viandas, nombreVianda, info);
+      p_viandas.recuClave(viandas, nombreVianda, info);
       cantidad := info.cantidad;
       precio := info.precioIndividual;
 
@@ -146,7 +146,7 @@ procedure Tpfinal is
    begin
       cantidadAQuitar := numeroEnt("Ingrese la cantidad a quitar");
 
-      recuClave(viandas, nombreVianda, info);
+      p_viandas.recuClave(viandas, nombreVianda, info);
 
       cantidad := info.cantidad;
       precio := info.precioIndividual;
@@ -181,9 +181,9 @@ procedure Tpfinal is
       recuPrim(platos, clave);
 
       for num in 1..long loop
-         recuClave(platos, clave, info);
+         p_platos.recuClave(platos, clave, info);
          Put(clave);Put("    ");Put(Integer'image(info.cantidad));Put("        ");Put(Float'Image(info.precioIndividual));New_Line;
-         recuSig(platos, clave, clave);
+         p_platos.recuSig(platos, clave, clave);
       end loop;
    end mostrarPlatos;
 
@@ -194,11 +194,11 @@ procedure Tpfinal is
 
    ---------------------------------------------- N3 ---------------------------------
 
-   procedure obtenerInfoPedido(info: in out tipoInfoPedido, clientes: in tipoArbolClientes, viandas: in tipoListaViandas)
+   procedure obtenerInfoPedido(info: in out tipoInfoPedido; clientes: in p_clientes.tipoArbol; viandas: in p_viandas.tipoLista)
       existe: boolean := False;
    begin
       loop
-         info.dniCliente := obtenerDNI();                    --N3-
+         info.dniCliente := obtenerDNI;                    --N3-
 
          if not existeCliente(info.dniCliente) then         --N3-
             Put_Line("No se ha encontrado un cliente registrado con este DNI");
@@ -218,12 +218,12 @@ procedure Tpfinal is
       info := new tipoInfoPedido;
 
       info.dniCliente := 0;
-      crear(info.platos); --ADT LO
+      p_platos.crear(info.platos); --ADT LO
       info.montoTotal := 0;
       info.fechaPedido := new tFecha;
    end crearPedido;
 
-   function obtenerIdentificador() return tipoClavePedido is
+   function obtenerIdentificador return tipoClavePedido is
       identificador: tipoClavePedido;
    begin
       loop
@@ -234,18 +234,18 @@ procedure Tpfinal is
       return identificador;
    end obtenerIdentificador;
 
-   function existePedido(pedidos: in tipoArbolPedidos, identificador: in tipoClavePedido) return boolean is
+   function existePedido(pedidos: in p_pedidos.tipoArbol; identificador: in tipoClavePedido) return boolean is
       info: tipoInfoPedido;
    begin
       begin
-         buscar(pedidos, identificador, info); --ADT ABB
+         p_pedidos.buscar(pedidos, identificador, info); --ADT ABB
          return True;
       exception
          when p_pedidos.claveNoExiste => return False;
       end;
    end existePedido;
 
-   procedure guardarPedido(pedidos: in out tipoArbolPedidos, identificador: in tipoClavePedido, info: in tipoInfoPedido)
+   procedure guardarPedido(pedidos: in out p_pedidos.tipoArbol; identificador: in tipoClavePedido; info: in tipoInfoPedido)
    begin
       begin
          insertar(pedidos, identificador, info); --ADT ABB
@@ -254,15 +254,15 @@ procedure Tpfinal is
       end;
    end guardarPedido;
 
-   procedure eliminarPedido(pedidos: in out tipoArbolPedidos, identificador: in tipoClavePedido)
+   procedure eliminarPedido(pedidos: in out p_pedidos.tipoArbol; identificador: in tipoClavePedido)
       info: tipoInfoPedido;
    begin
       begin
-         buscar(pedidos, identificador, info);  --ADT ABB
-         vaciar(info.platos);                   --ADT LO
-         suprimir(clientes, dni);               --ADT ABB
+         p_pedidos.buscar(pedidos, identificador, info);  --ADT ABB
+         p_platos.vaciar(info.platos);                    --ADT LO
+         p_clientes.suprimir(clientes, dni);              --ADT ABB
       exception
-         when p_pedidos.claveNoExiste => Put_Line("Ocurrio un error, intente mas tarde");
+         when others => Put_Line("Ocurrio un error, intente mas tarde");
       end;
    end eliminarPedido;
 
@@ -280,7 +280,7 @@ procedure Tpfinal is
       info : tipoInfoCliente;
    begin
       begin
-         buscar(clientes, dni, info);    -- ADT ABB
+         p_clientes.buscar(clientes, dni, info);    -- ADT ABB
          return True;
       exception
          when p_clientes.claveNoExiste => return False;--Put_line("No existe el cliente");
@@ -361,7 +361,7 @@ procedure Tpfinal is
    function existeVianda(viandas: in p_viandas.tipoLista; nombreVianda: in tipoClaveVianda) return Boolean is
    info: tipoInfoVianda;
    begin
-      recuClave(viandas, nombreVianda, info);     -- ADT LO
+      p_viandas.recuClave(viandas, nombreVianda, info);     -- ADT LO
       return True;
       exception when p_viandas.claveNoExiste => return False;
    end existeVianda;
@@ -403,7 +403,7 @@ procedure Tpfinal is
    procedure cargarPrecioN(viandas: in out p_viandas.tipoLista; nombreVianda: in tipoClaveVianda; precio: in Float) is
       info: tipoInfoVianda;
    begin
-      recuClave(viandas, nombreVianda, info);       -- ADT LO
+      p_viandas.recuClave(viandas, nombreVianda, info);       -- ADT LO
 
       if (info.precioIndividual /= -1.0) then
          Put_Line("El precio de esta vianda ya esta cargado");
@@ -476,7 +476,7 @@ procedure Tpfinal is
    function obtenerDireccion(dniCliente: in tipoClaveCliente; clientes: in p_clientes.tipoArbol) return String is
       info: tipoInfoCliente;
    begin
-      buscar(clientes, dniCliente, info);     -- ADT ABB
+      p_clientes.buscar(clientes, dniCliente, info);     -- ADT ABB
       return To_String(info.direccion);
    end obtenerDireccion;
 
@@ -485,7 +485,7 @@ procedure Tpfinal is
       fechaPedido: tFecha;
       direccion: String:="";
    begin
-      buscar(pedidos, numeroDePedido, info);                           -- ADT ABB
+      p_pedidos.buscar(pedidos, numeroDePedido, info);                           -- ADT ABB
       fechaPedido := info.fechaPedido;
 
       if esMismaFecha(fecha, fechaPedido) then                        -- N4
@@ -505,7 +505,7 @@ procedure Tpfinal is
       info: tipoInfoPedido;
       envio: Float;
    begin
-      buscar(pedidos, numeroDePedido, info);
+      p_pedidos.buscar(pedidos, numeroDePedido, info);
       dniClienteActual := info.dniCliente;
 
       if esMismoDNI(dniCliente, dniClienteActual) then              -- N4
@@ -519,13 +519,13 @@ procedure Tpfinal is
 
    ---------------------------------------------- N2 --------------------------------
 
-   procedure bajaPedido(¿pedidos: in out tipoArbolPedidos)
+   procedure bajaPedido(pedidos: in out p_pedidos.tipoArbol)
       identificador: tipoClavePedido;
    begin
       loop
-         identificador := obtenerIdentificador();                    --N3-
+         identificador := obtenerIdentificador;                    --N3-
          if not existePedido(pedidos, identificador) then            --N3-
-            Put(“No se ha encontrado un pedido con el identificador dado");
+            Put("No se ha encontrado un pedido con el identificador dado");
          else
             eliminarPedido(pedidos, identificador);                  --N3-
          end if;
@@ -533,26 +533,28 @@ procedure Tpfinal is
       end loop;
    end bajaPedido;
 
-   procedure modificarPedido(pedidos: in out tipoArbolPedidos, clientes: in tipoArbolClientes, viandas: in tipoListaViandas)
+   procedure modificarPedido(pedidos: in out p_pedidos.tipoArbol, clientes: in p_clientes.tipoArbol, viandas: in p_viandas.tipoLista)
       identificador: tipoClavePedido;
       info: tipoInfoPedido;
    begin
       loop
-         identificador := obtenerIdentificador();                 --N3-
+         identificador := obtenerIdentificador;                 --N3-
          if not existePedido(pedidos, identificador) then         --N3-
             Put_Line("No se ha encontrado un pedido con el identificador dado");
          else
-            buscar(pedidos, identificador, info);
+            p_pedidos.buscar(pedidos, identificador, info);
             obtenerInfoPedido(info, clientes, viandas);           --N3-
          end if;
          exit when not confirma("Desea modificar otro pedido?"); --U
       end loop;
    end modificarPedido;
 
-   procedure altaPedido(pedidos: in out tipoArbolPedidos, identificador: in out tipoClavePedido, clientes: in tipoArbolClientes, viandas: in tipoListaViandas)
+   procedure altaPedido(pedidos: in out p_pedidos.tipoArbol; identificador: in out tipoClavePedido; clientes: in p_clientes.tipoArbol; viandas: in p_viandas.tipoLista)
+      info: tipoInfoPedido;
    begin
       loop
-         crearPedido();                                         --N3
+         info := new tipoInfoPedido;  -- ESTO FUNCIONA? La idea es que crea un nuevo objeto, sin sobreescribir el anterior
+         crearPedido(info);                                     --N3
 
          obtenerInfoPedido(info, clientes, viandas);            --N3-
          guardarPedido(pedidos, identificador, info);           --N3-
@@ -561,7 +563,7 @@ procedure Tpfinal is
       end loop
    end altaPedido;
 
-   function menuABMPedidos() return Integer is
+   function menuABMPedidos return Integer is
    begin
       Put_Line("Menu Modulo Pedidos");
       Put_Line("1: Cargar Pedido");
@@ -758,11 +760,11 @@ procedure Tpfinal is
 
    ---------------------------------------------- N1 --------------------------------
    
-   procedure abmPedido(pedidos: in out tipoArbolPedidos, identificador: in out tipoClavePedido, clientes: in tipoArbolClientes, viandas: in tipoListaViandas)
+   procedure abmPedido(pedidos: in out p_pedidos.tipoArbol; identificador: in out tipoClavePedido; clientes: in p_clientes.tipoArbol; viandas: in p_viandas.tipoLista)
       resp: entero;
    begin
       loop
-         resp := menuABMPedidos();                                            --N2-
+         resp := menuABMPedidos;                                            --N2-
          case resp is
             when 1 => altaPedido(pedidos, identificador, clientes, viandas);  --N2-
             when 2 => modificarPedido(pedidos, clientes, viandas);            --N2-
