@@ -12,9 +12,8 @@ use Ada.Text_IO,
 --Viandas, Pedidos, Clientes, Platos
 
 
-
 procedure Tpfinal is
-
+   clienteNoExiste: exception;
 
    --Viandas
    subtype tipoClaveVianda is Unbounded_String; -- Nombre
@@ -255,16 +254,11 @@ procedure Tpfinal is
    procedure obtenerInfoPedido(info: in out tipoInfoPedido; clientes: in p_clientes.tipoArbol; viandas: in out p_viandas.tipoLista) is
       existe: boolean := False;
    begin
-      loop
-         info.dniCliente := obtenerDNI;                    --N3-
+      info.dniCliente := obtenerDNI;                    --N3-
 
-         if not existeCliente(clientes, info.dniCliente) then         --N3-
-            Put_Line("No se ha encontrado un cliente registrado con este DNI");
-         else
-            existe := True;
-         end if;
-         exit when existe;
-      end loop;
+      if not existeCliente(clientes, info.dniCliente) then         --N3-
+         raise clienteNoExiste;
+      end if;
 
       Put_Line("Fecha del pedido");
       solicitarFecha(info.fechaPedido);                    --N3-
@@ -559,7 +553,12 @@ procedure Tpfinal is
             Put_Line("No se ha encontrado un pedido con el identificador dado");
          else
             p_pedidos.buscar(pedidos, identificador, info);
-            obtenerInfoPedido(info, clientes, viandas);           --N3-
+            begin
+               obtenerInfoPedido(info, clientes, viandas);           --N3-
+               p_pedidos.modificar(pedidos, identificador, info);
+            exception
+               when clienteNoExiste => Put_Line("No existe un cliente con el DNI dado");
+            end;
          end if;
          exit when not confirma("Desea modificar otro pedido?"); --U
       end loop;
@@ -570,7 +569,11 @@ procedure Tpfinal is
    begin
       crearPedido(info);                                     --N3
 
-      obtenerInfoPedido(info, clientes, viandas);            --N3-
+      begin
+         obtenerInfoPedido(info, clientes, viandas);           --N3-
+      exception
+         when clienteNoExiste => Put_Line("No existe un cliente con el DNI dado");
+      end;
       guardarPedido(pedidos, identificador, info);           --N3-
       identificador := identificador + 1;
    end altaPedido;
