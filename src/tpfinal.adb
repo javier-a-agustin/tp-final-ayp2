@@ -188,15 +188,21 @@ procedure Tpfinal is
       clave: tipoClavePlato;
       info: tipoInfoPlato;
       long: Integer;
+      salir: Integer := 0;
    begin
       long := longitud(platos);      -- ADT LO
       recuPrim(platos, clave);
 
-      for num in 1..long loop
+      --for num in 1..long loop
+      loop  begin  
          p_platos.recuClave(platos, clave, info);
-         Put(clave);Put("    ");Put(Integer'image(info.cantidad));Put("        ");Put(Float'Image(info.precioIndividual));New_Line;
+         Put("                                 ");Put(clave);Put("    ");Put(Integer'image(info.cantidad));Put("        ");Put(Float'Image(info.precioIndividual));New_Line;
          p_platos.recuSig(platos, clave, clave);
+         exception when p_platos.claveEsUltima => salir := 1;
+         end;
+      exit when salir = 1;
       end loop;
+      
    end mostrarPlatos;
 
    function obtenerEnvio(montoTotal: in Float) return Float is
@@ -473,20 +479,20 @@ procedure Tpfinal is
 
    procedure mostrarCabeceraListadosDia is
    begin
-      Put_Line("ID        DIA        PRECIO                Direccion");
+      Put_Line("ID           DIA              PRECIO                    Direccion");
    end mostrarCabeceraListadosDia;
 
-   function obtenerDireccion(dniCliente: in tipoClaveCliente; clientes: in p_clientes.tipoArbol) return String is
+   function obtenerDireccion(dniCliente: in tipoClaveCliente; clientes: in p_clientes.tipoArbol) return Unbounded_String is
       info: tipoInfoCliente;
    begin
       p_clientes.buscar(clientes, dniCliente, info);     -- ADT ABB
-      return To_String(info.direccion);
+      return info.direccion;
    end obtenerDireccion;
 
    procedure mostrarPedidoDia(pedidos: in p_pedidos.tipoArbol; numeroDePedido: in tipoClavePedido; fecha: in tFecha; clientes: in p_clientes.tipoArbol) is
       info: tipoInfoPedido;
       fechaPedido: tFecha;
-      direccion: String:="";
+      direccion: Unbounded_String;
    begin
       p_pedidos.buscar(pedidos, numeroDePedido, info);                           -- ADT ABB
       fechaPedido := info.fechaPedido;
@@ -502,7 +508,7 @@ procedure Tpfinal is
       Put_Line("DNI            DIRECCION        PLATO            CANTIDAD        PRECIO");
    end mostrarCabeceraListadoPedidosCliente;
 
-   procedure mostrarPedidoCliente(pedidos: in p_pedidos.tipoArbol; numeroDePedido: in tipoClavePedido; dniCliente: in tipoClaveCliente; direccion: in String) is
+   procedure mostrarPedidoCliente(pedidos: in p_pedidos.tipoArbol; numeroDePedido: in tipoClavePedido; dniCliente: in tipoClaveCliente; direccion: in Unbounded_String) is
       dniClienteActual: Integer;
       platos: p_platos.tipoLista;
       info: tipoInfoPedido;
@@ -510,13 +516,13 @@ procedure Tpfinal is
    begin
       p_pedidos.buscar(pedidos, numeroDePedido, info);
       dniClienteActual := info.dniCliente;
-
+      
       if esMismoDNI(dniCliente, dniClienteActual) then              -- N4
          platos := info.platos;
-         Put(Integer'Image(dniCliente)); Put(direccion); New_Line;
+         Put(Integer'Image(dniCliente));Put("          ");Put(direccion); New_Line;
          mostrarPlatos(platos);                                     -- N4
          envio := obtenerEnvio(info.montoTotal);                    -- N4
-         Put("TOTAL:  "); Put(Float'Image(info.montoTotal)); Put("  ENVIO:   "); Put(Float'Image(envio)); New_Line;
+         Put("            TOTAL:  "); Put(Float'Image(info.montoTotal)); Put("  ENVIO:   "); Put(Float'Image(envio)); New_Line;
       end if;
    end mostrarPedidoCliente;
 
@@ -725,13 +731,13 @@ procedure Tpfinal is
       fecha: tFecha;
       numeroDePedido: tipoClavePedido;
    begin
-      mostrarCabeceraListadosDia;          --N3
+      
       if esVacio(pedidos) then
          Put_Line("No hay pedidos para mostrar");
       else
          solicitarFecha(fecha);            -- N3
          p_pedidos.inOrder(pedidos, colaPedidos);    -- ADT ABB
-
+         mostrarCabeceraListadosDia;          --N3                                            
          while p_pedidos.ColaRecorridos.esVacia(colaPedidos) /= True loop       -- ADT COLA
             p_pedidos.ColaRecorridos.frente(colaPedidos, numeroDePedido);       -- ADT COLA
             mostrarPedidoDia(pedidos, numeroDePedido, fecha, clientes);         -- N3
@@ -745,9 +751,10 @@ procedure Tpfinal is
       dniCliente: Integer;
       colaPedidos: p_pedidos.ColaRecorridos.tipoCola;
       numeroDePedido: Integer;
-      direccion: String:="";
+      direccion: Unbounded_String;
+      terminar: Boolean := False;
    begin
-      mostrarCabeceraListadoPedidosCliente;             -- N3
+      
       if esVacio(pedidos) then
          Put_Line("No hay pedidos para mostrar");
       else
@@ -755,13 +762,18 @@ procedure Tpfinal is
          direccion := obtenerDireccion(dniCliente, clientes);                 -- N3
          p_pedidos.inOrder(pedidos, colaPedidos);                                      -- ADT ABB
 
-         while p_pedidos.ColaRecorridos.esVacia(colaPedidos) /= True loop     -- ADT COLA
+         mostrarCabeceraListadoPedidosCliente;             -- N3
+         while (p_pedidos.ColaRecorridos.esVacia(colaPedidos) /= True) or (terminar = True) loop     -- ADT COLA
             p_pedidos.ColaRecorridos.frente(colaPedidos, numeroDePedido);     -- ADT COLA
+            
             mostrarPedidoCliente(pedidos, numeroDePedido, dniCliente, direccion);      -- N3
-            p_pedidos.ColaRecorridos.desencolar(colaPedidos);                        -- ADT COLA                                        -- ADT COLA
+            p_pedidos.ColaRecorridos.desencolar(colaPedidos);                        -- ADT COLA 
+            
+           
          end loop;
       end if;
    exception when p_pedidos.errorEnCola => continua("Ocurrio un error, intente mas tarde");
+   
    end listarPedidosDeCliente;
 
 
