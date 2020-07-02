@@ -81,7 +81,7 @@ procedure Tpfinal is
       end;
    end existePlato;
    
-   procedure cargarPlato (platos: in out p_platos.tipoLista; viandas: in p_viandas.tipoLista; total: in out Float) is
+   procedure cargarPlato (platos: in out p_platos.tipoLista; viandas: in out p_viandas.tipoLista; total: in out Float) is
       vianda: tipoInfoVianda;
       plato: tipoClavePlato;
       info: tipoInfoPlato;
@@ -98,31 +98,38 @@ procedure Tpfinal is
             recuClave(platos, plato, info);                                                --ADT LO
             Put("Este plato ya se encuentra en el pedido. Unidades: ");Put(Integer'image(info.cantidad));New_Line;
          else
+            info.cantidad := 0;
             p_platos.insertar(platos, plato, info);                                             --ADT LO
          end if;
 
-         Put("El precio por unidad es de: ");Put(Float'image(vianda.precioIndividual));New_Line;
+         Put("El precio por unidad es de: ");Put(vianda.precioIndividual, Fore => 6, Aft => 2);New_Line;
 
          loop
             Put("Cantidad maxima de unidades: ");Put(Integer'image(vianda.cantidad));New_Line;
             cantidad := numeroEnt("Ingrese la cantidad de unidades que desea agregar: ");  --U
             if cantidad > vianda.cantidad then
                Put_Line("No hay suficientes viandas disponibles");
-               cantidad := 0;
+               cantidad := -1;
             end if;
-            exit when cantidad > 0;
+            exit when cantidad >= 0;
          end loop;
 
          info.precioIndividual := vianda.precioIndividual;
          info.cantidad := info.cantidad + cantidad;
+         p_platos.modificar(platos, plato, info);
 
+         if cantidad > 0 then
+            vianda.cantidad := vianda.cantidad - cantidad;
+            p_viandas.modificar(viandas, plato, vianda);
+         end if;
+         
          total := total + Float(cantidad) * vianda.precioIndividual;
       end if;
    end cargarPlato;
 
    ---------------------------------------------- N4 ---------------------------------------
    
-   procedure cargarPlatos (platos: in out p_platos.tipoLista; viandas: in p_viandas.tipoLista; total: in out Float) is
+   procedure cargarPlatos (platos: in out p_platos.tipoLista; viandas: in out p_viandas.tipoLista; total: in out Float) is
    begin
       loop
          cargarPlato(platos, viandas, total);
@@ -196,7 +203,7 @@ procedure Tpfinal is
       --for num in 1..long loop
       loop  begin  
          p_platos.recuClave(platos, clave, info);
-         Put("                                 ");Put(clave);Put("    ");Put(Integer'image(info.cantidad));Put("        ");Put(Float'Image(info.precioIndividual));New_Line;
+         Put("                                 ");Put(clave);Put("    ");Put(Integer'image(info.cantidad));Put("        ");Put(info.precioIndividual, Fore => 6, Aft => 2);New_Line;
          p_platos.recuSig(platos, clave, clave);
          exception when p_platos.claveEsUltima => salir := 1;
          end;
@@ -237,15 +244,15 @@ procedure Tpfinal is
       --fecha: tFecha;
    begin
       loop
-         fecha.dia := enteroEnRango("Ingrese el dia", 0, 31);     -- Fechas
-         fecha.mes := enteroEnRango("Ingrese el mes", 0, 12);     -- Fechas
+         fecha.dia := enteroEnRango("Ingrese el dia", 1, 31);     -- Fechas
+         fecha.mes := enteroEnRango("Ingrese el mes", 1, 12);     -- Fechas
          fecha.anio := enteroEnRango("Ingrese el año", 2000, 2020);  -- Fechas
 
          exit when esFechaCorrecta(fecha) = True;
       end loop;
    end solicitarFecha;
    
-   procedure obtenerInfoPedido(info: in out tipoInfoPedido; clientes: in p_clientes.tipoArbol; viandas: in p_viandas.tipoLista) is
+   procedure obtenerInfoPedido(info: in out tipoInfoPedido; clientes: in p_clientes.tipoArbol; viandas: in out p_viandas.tipoLista) is
       existe: boolean := False;
    begin
       loop
@@ -542,7 +549,7 @@ procedure Tpfinal is
       end loop;
    end bajaPedido;
 
-   procedure modificarPedido(pedidos: in out p_pedidos.tipoArbol; clientes: in p_clientes.tipoArbol; viandas: in p_viandas.tipoLista) is
+   procedure modificarPedido(pedidos: in out p_pedidos.tipoArbol; clientes: in p_clientes.tipoArbol; viandas: in out p_viandas.tipoLista) is
       identificador: tipoClavePedido;
       info: tipoInfoPedido;
    begin
@@ -558,7 +565,7 @@ procedure Tpfinal is
       end loop;
    end modificarPedido;
    
-   procedure altaPedido(pedidos: in out p_pedidos.tipoArbol; identificador: in out tipoClavePedido; clientes: in p_clientes.tipoArbol; viandas: in p_viandas.tipoLista) is
+   procedure altaPedido(pedidos: in out p_pedidos.tipoArbol; identificador: in out tipoClavePedido; clientes: in p_clientes.tipoArbol; viandas: in out p_viandas.tipoLista) is
       info: tipoInfoPedido;
    begin
       crearPedido(info);                                     --N3
@@ -568,7 +575,7 @@ procedure Tpfinal is
       identificador := identificador + 1;
    end altaPedido;
 
-   procedure altaPedidos(pedidos: in out p_pedidos.tipoArbol; identificador: in out tipoClavePedido; clientes: in p_clientes.tipoArbol; viandas: in p_viandas.tipoLista) is
+   procedure altaPedidos(pedidos: in out p_pedidos.tipoArbol; identificador: in out tipoClavePedido; clientes: in p_clientes.tipoArbol; viandas: in out p_viandas.tipoLista) is
    begin
       loop
          altaPedido(pedidos, identificador, clientes, viandas);
@@ -779,7 +786,7 @@ procedure Tpfinal is
 
    ---------------------------------------------- N1 --------------------------------
    
-   procedure abmPedido(pedidos: in out p_pedidos.tipoArbol; identificador: in out tipoClavePedido; clientes: in p_clientes.tipoArbol; viandas: in p_viandas.tipoLista) is
+   procedure abmPedido(pedidos: in out p_pedidos.tipoArbol; identificador: in out tipoClavePedido; clientes: in p_clientes.tipoArbol; viandas: in out p_viandas.tipoLista) is
       resp: Integer;
    begin
       loop
