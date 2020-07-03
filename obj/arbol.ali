@@ -33,10 +33,10 @@ D a-stream.ads		20190518041256 119b8fb3 ada.streams%s
 D a-tags.ads		20190518041258 491b781d ada.tags%s
 D a-textio.ads		20190518041258 aef4d56d ada.text_io%s
 D a-unccon.ads		20190518041256 0e9b276f ada.unchecked_conversion%s
-D arbol.ads		20140507144144 8e7e6f43 arbol%s
-D arbol.adb		20200507165622 31c15161 arbol%b
-D cola.ads		20140507143732 dfc50dd7 cola%s
-D cola.adb		20200419210836 88ccc87b cola%b
+D arbol.ads		20200703222508 8e7e6f43 arbol%s
+D arbol.adb		20200703222508 31c15161 arbol%b
+D cola.ads		20200703222508 dfc50dd7 cola%s
+D cola.adb		20200703222508 88ccc87b cola%b
 D interfac.ads		20190518041256 5ab55268 interfaces%s
 D i-cstrea.ads		20190518041256 e53d8b8e interfaces.c_streams%s
 D system.ads		20190518041258 32a08138 system%s

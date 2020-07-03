@@ -20,8 +20,8 @@ W unchecked_deallocation%s
 
 U lista%s		lista.ads		11f93368 BN EE NE OO PK GE IL
 
-D lista.ads		20200330142626 11f93368 lista%s
-D lista.adb		20200627225036 4afcbd3e lista%b
+D lista.ads		20200703222508 11f93368 lista%s
+D lista.adb		20200703222508 4afcbd3e lista%b
 D system.ads		20190518041258 32a08138 system%s
 D unchdeal.ads		20190518041258 214516a4 unchecked_deallocation%s
 G a e

@@ -294,15 +294,15 @@ package body ada_main is
    end;
 
 --  BEGIN Object file/option list
-   --   C:\GNAT\tpfinal\obj\cola.o
-   --   C:\GNAT\tpfinal\obj\arbol.o
-   --   C:\GNAT\tpfinal\obj\fechas.o
-   --   C:\GNAT\tpfinal\obj\lista.o
-   --   C:\GNAT\tpfinal\obj\pila.o
-   --   C:\GNAT\tpfinal\obj\utiles.o
-   --   C:\GNAT\tpfinal\obj\tpfinal.o
-   --   -LC:\GNAT\tpfinal\obj\
-   --   -LC:\GNAT\tpfinal\obj\
+   --   C:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\cola.o
+   --   C:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\arbol.o
+   --   C:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\fechas.o
+   --   C:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\lista.o
+   --   C:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\pila.o
+   --   C:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\utiles.o
+   --   C:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\tpfinal.o
+   --   -LC:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\
+   --   -LC:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\
    --   -LC:/gnat/2019/lib/gcc/x86_64-pc-mingw32/8.3.1/adalib/
    --   -static
    --   -lgnat

@@ -1,23 +1,23 @@
 [GENERATED OBJECT FILE]
 b__tpfinal.o
 [PROJECT FILES]
-C:\GNAT\tpfinal\tpfinal.gpr
-20200618011740
+C:\Users\nano0\Documents\Repos\tp-final-ayp2\tpfinal.gpr
+20200703222508
 [BOUND OBJECT FILES]
-C:\GNAT\tpfinal\obj\cola.o
-C:\GNAT\tpfinal\obj\arbol.o
-C:\GNAT\tpfinal\obj\fechas.o
-C:\GNAT\tpfinal\obj\lista.o
-C:\GNAT\tpfinal\obj\pila.o
-C:\GNAT\tpfinal\obj\utiles.o
-C:\GNAT\tpfinal\obj\tpfinal.o
+C:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\cola.o
+C:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\arbol.o
+C:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\fechas.o
+C:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\lista.o
+C:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\pila.o
+C:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\utiles.o
+C:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\tpfinal.o
 [GENERATED SOURCE FILES]
 b__tpfinal.ads
 b__tpfinal.adb
 b__tpfinal.ali
 [RESULTING OPTIONS]
--LC:\GNAT\tpfinal\obj\
--LC:\GNAT\tpfinal\obj\
+-LC:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\
+-LC:\Users\nano0\Documents\Repos\tp-final-ayp2\obj\
 -LC:/gnat/2019/lib/gcc/x86_64-pc-mingw32/8.3.1/adalib/
 -static
 -static-libgcc
